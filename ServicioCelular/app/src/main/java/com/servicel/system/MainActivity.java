@@ -2,8 +2,9 @@ package com.servicel.system;
 
 import android.app.*;
 import android.os.*;
+import android.support.v7.app.*;
 
-public class MainActivity extends Activity 
+public class MainActivity extends AppCompatActivity 
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)

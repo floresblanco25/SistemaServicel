@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.servicel.system" >
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+		android:resizeableActivity = "true">
+        <activity
+            android:name=".aMainActivity"
+            android:label="@string/app_name" 
+			android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+										<!--adds a launcher shortcut to homescreen-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+	<activity
+            android:name=".cLauncherActivity"
+            android:label="@string/app_name" 
+		android:parentActivityName=".aMainActivity">
+		<meta-data android:name="android.support.PARENT_ACTIVITY"
+			android:value=".aMainActivity"></meta-data> 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/baseline_save_white_24"
+        android:title="Guardar" />
+
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/baseline_edit_white_24"
+        android:title="Editar" />
+	
+	<item
+        android:id="@+id/deliver"
+        android:icon="@drawable/baseline_add_to_home_screen_white_24"
+        android:title="Entregar" 
+		/>
+	
+
+    <item
+        android:id="@+id/clear"
+        android:icon="@drawable/baseline_clear_all_white_24"
+        android:title="Limpiar" />
+
+    <item
+        android:id="@+id/deleteOrder"
+        android:icon="@drawable/baseline_delete_forever_white_24"
+        android:title="Borrar Orden" />
+
+</menu>

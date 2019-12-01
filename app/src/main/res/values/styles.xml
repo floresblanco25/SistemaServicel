@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/accent</item>
+	</style>
+	<style name="Widget"/>
+
+    <style name="Widget.ProgressBar.CircularProgressBar" parent="Widget">
+        <item name="android:indeterminateOnly">false</item>
+
+    </style>
+
+    <style name="Widget.ProgressBar.Holo.CircularProgressBar" parent="Widget.ProgressBar.CircularProgressBar">
+        <item name="cpb_hasShadow">false</item>
+	</style>
+	
+	
+	
+	<style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+		<item name="actionMenuTextColor">@android:color/white</item>
+		<item name="windowActionBar">true</item>
+		<item name="elevation">0dp</item>
+		<item name="android:background">@color/primary_dark</item>
+
+	</style>
+
+	<style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+		<item name="android:textSize">21sp</item>
+		<item name="android:textStyle">normal</item>
+	</style>
+		
+		
+		
+	<!-- Base style for TextInputLayout. You should use one of the sub-styles instead. -->
+		
+	<style name="Hint" parent="TextAppearance.Design.Hint">
+		<item name="android:textColor">@color/primary_dark</item>
+	</style>
+		
+   </resources>

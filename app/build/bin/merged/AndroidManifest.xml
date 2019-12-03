@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="27" />
+        android:targetSdkVersion="21" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +15,7 @@
         android:resizeableActivity="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.servicel.system.aMainActivity"
+            android:name="com.servicel.system.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan" >
             <intent-filter>
@@ -27,10 +27,10 @@
         <activity
             android:name="com.servicel.system.cLauncherActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.servicel.system.aMainActivity" >
+            android:parentActivityName="com.servicel.system.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".aMainActivity" />
+                android:value=".MainActivity" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

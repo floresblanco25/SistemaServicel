@@ -43,7 +43,7 @@ public class bClientsListFragment extends Fragment
 
 		MySQLiteHelper db = new MySQLiteHelper(this.getActivity());
 		datamodel = new ArrayList<recyclerRowModel>();
-		datamodel =  db.getColumnStrings(aMainActivity.COLUMNNAME, aMainActivity.COLUMNISDELIVERED);//Column names returned as array list from mysqlitehelper.getcolumnstrings(string columnname)
+		datamodel =  db.getColumnStrings(MainActivity.COLUMNNAME, MainActivity.COLUMNISDELIVERED);//Column names returned as array list from mysqlitehelper.getcolumnstrings(string columnname)
 		recyclerView = v.findViewById(R.id.recycler);
 		recycler = new cRecyclerAdapter(datamodel);//Passes a arraylist of recyclerrow model
 

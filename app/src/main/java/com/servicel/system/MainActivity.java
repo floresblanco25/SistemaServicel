@@ -13,7 +13,7 @@ import com.servicel.system.db.MySQLiteHelper;
 
 
 
-public class aMainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity
 
 {
 
@@ -66,8 +66,6 @@ public class aMainActivity extends AppCompatActivity
 		
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setElevation(0);
-		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		mContext = this.getApplicationContext();
 
 		

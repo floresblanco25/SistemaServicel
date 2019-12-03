@@ -87,7 +87,7 @@ public class cLauncherActivity extends Activity
 
 			try
 			{
-				transaction.replace(R.id.container, fragmentToOpen, aMainActivity.tagShowOrder);
+				transaction.replace(R.id.container, fragmentToOpen, MainActivity.tagShowOrder);
 				transaction.addToBackStack(currentFragment);
 				transaction.commit();	}
 			catch (Exception e)

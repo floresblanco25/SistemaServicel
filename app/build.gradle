@@ -1,16 +1,17 @@
 apply plugin: 'com.android.application'
 
 repositories {
+	google()
 		maven { url 'https://jitpack.io' }
 		}
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.2"
+    compileSdkVersion 21
+    buildToolsVersion "27.+"
 
     defaultConfig {
         applicationId "com.servicel.system"
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }

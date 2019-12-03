@@ -43,14 +43,14 @@ public class cRecyclerAdapter extends RecyclerView.Adapter<cRecyclerAdapter.View
 		//3 job getting data then go to mysqlitehelper
 		//desde la db
 		//recibimos una lista con objetos que cada uno tienen datos colo fecha nombre etc y con get(id=posision) obtenemos un objeto de la lista 
-		List listOfObjects = database.getDBENTRYMODELColumnStrings(aMainActivity.COLUMNID,
-																   aMainActivity.COLUMNNDATE, aMainActivity.COLUMNTIME, aMainActivity.COLUMNNAME,
-																   aMainActivity.COLUMNNPHONE, aMainActivity.COLUMNNEMAIL, aMainActivity.COLUMNNIMEI,
-																   aMainActivity.COLUMNBRAND, aMainActivity.COLUMNMODEL, aMainActivity.COLUMNCOLOR, aMainActivity.COLUMNCONDITIONS,
-																   aMainActivity.COLUMNPASSWORD, aMainActivity.COLUMNKINDOFSERVICE, aMainActivity.COLUMNTOTALPRICE,
-																   aMainActivity.COLUMNDEPOSIT, aMainActivity.COLUMNPARTSPRICE, aMainActivity.COLUMNDEADLINE, aMainActivity.COLUMNPOWERSON,
-																   aMainActivity.COLUMNHASCOVER, aMainActivity.COLUMNHASSIM, aMainActivity.COLUMNHASMEMORY,
-																   aMainActivity.COLUMNHASBATTERY, aMainActivity.COLUMNHASSCREWS, aMainActivity.COLUMNISDELIVERED
+		List listOfObjects = database.getDBENTRYMODELColumnStrings(MainActivity.COLUMNID,
+																   MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
+																   MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
+																   MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
+																   MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
+																   MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
+																   MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
+																   MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
 																   );
 		//con el objeto sacado segin la posision que clickeamos
 		xxDbEntryModel object = (xxDbEntryModel) listOfObjects.get(position);
@@ -152,14 +152,14 @@ public class cRecyclerAdapter extends RecyclerView.Adapter<cRecyclerAdapter.View
 						//3 job getting data then go to mysqlitehelper
 						//desde la db
 						//recibimos una lista con objetos que cada uno tienen datos colo fecha nombre etc y con get(id=posision) obtenemos un objeto de la lista 
-						List listOfObjects = database.getDBENTRYMODELColumnStrings(aMainActivity.COLUMNID,
-																				   aMainActivity.COLUMNNDATE, aMainActivity.COLUMNTIME, aMainActivity.COLUMNNAME,
-																				   aMainActivity.COLUMNNPHONE, aMainActivity.COLUMNNEMAIL, aMainActivity.COLUMNNIMEI,
-																				   aMainActivity.COLUMNBRAND, aMainActivity.COLUMNMODEL, aMainActivity.COLUMNCOLOR, aMainActivity.COLUMNCONDITIONS,
-																				   aMainActivity.COLUMNPASSWORD, aMainActivity.COLUMNKINDOFSERVICE, aMainActivity.COLUMNTOTALPRICE,
-																				   aMainActivity.COLUMNDEPOSIT, aMainActivity.COLUMNPARTSPRICE, aMainActivity.COLUMNDEADLINE, aMainActivity.COLUMNPOWERSON,
-																				   aMainActivity.COLUMNHASCOVER, aMainActivity.COLUMNHASSIM, aMainActivity.COLUMNHASMEMORY,
-																				   aMainActivity.COLUMNHASBATTERY, aMainActivity.COLUMNHASSCREWS, aMainActivity.COLUMNISDELIVERED
+						List listOfObjects = database.getDBENTRYMODELColumnStrings(MainActivity.COLUMNID,
+																				   MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
+																				   MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
+																				   MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
+																				   MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
+																				   MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
+																				   MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
+																				   MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
 																				   );
 						//con el objeto sacado segin la posision que clickeamos
 						xxDbEntryModel object = (xxDbEntryModel) listOfObjects.get(positionClicked);

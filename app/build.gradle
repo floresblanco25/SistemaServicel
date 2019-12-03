@@ -4,13 +4,13 @@ repositories {
 		maven { url 'https://jitpack.io' }
 		}
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
 
     defaultConfig {
         applicationId "com.servicel.system"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -26,7 +26,11 @@ android {
 dependencies {
 	api 'com.android.support:design:27.+'
 	api 'com.android.support:recyclerview-v7:27.+'
-	api 'com.android.support:appcompat-v7:23.1.1'
+	api 'com.android.support:appcompat-v7:+'
 	api 'com.github.angads25:toggle:1.0.0'
+	compile ('android.arch.core:runtime:+')
+{
+force = true
+}
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

@@ -24,13 +24,10 @@ android {
 
 
 dependencies {
+	compile ('android.arch.core:runtime:+'){force = true}
 	api 'com.android.support:design:27.+'
 	api 'com.android.support:recyclerview-v7:27.+'
-	api 'com.android.support:appcompat-v7:+'
+	api 'com.android.support:appcompat-v7:27.+'
 	api 'com.github.angads25:toggle:1.0.0'
-	compile ('android.arch.core:runtime:+')
-{
-force = true
-}
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

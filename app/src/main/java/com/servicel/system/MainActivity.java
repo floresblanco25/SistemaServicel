@@ -8,18 +8,14 @@ import android.support.v7.widget.*;
 import android.view.*;
 import android.widget.*;
 import com.servicel.system.db.*;
-
 import android.support.v7.widget.Toolbar;
-
-
 
 
 public class MainActivity extends AppCompatActivity
 
 {
 
-
-
+//initialize
 	MySQLiteHelper recolectDataAdapter;
 	public static String COLUMNID = "ID";
 	public static String TABLENAME = "CLIENTES";
@@ -45,39 +41,63 @@ public class MainActivity extends AppCompatActivity
 	public static String COLUMNHASMEMORY = "HASMEMORY";
 	public static String COLUMNHASBATTERY = "HASBATTERY";
 	public static String COLUMNHASSCREWS = "HASSCREWS";
-
 	Fragment fragmentToOpen;
     FrameLayout container;
     private static Context mContext;
     public static String currentFragment="current";
 	public static String tagShowOrder = "shororder";
-
 	public static String COLUMNISDELIVERED="ISDELIVERED";
 
-	private Toolbar mTopToolbar;
+
+
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-		
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+
+
+
+
+
+
+//light statusbar
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+		{
 			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR); 
 		}
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+		{
 		}
-		
-		
-		mTopToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mTopToolbar);
-		
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+
+
+
+
+
+
+
+//toolbar
+		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		mContext = this.getApplicationContext();
 
-		
-		
-		
+
+
+
+
+
+
+
+//instance
 		if (savedInstanceState != null)
 		{
 			fragmentToOpen = getFragmentManager().getFragment(savedInstanceState, currentFragment);
@@ -88,10 +108,12 @@ public class MainActivity extends AppCompatActivity
 			final FragmentTransaction transaction= manager.beginTransaction();
 
 
-			// 3------ send bundle to ShowOrder.java
+
+
+
+
+//Show initial frgmnt
 			fragmentToOpen = new ClientsListFragment();
-
-
 			try
 			{
 				transaction.replace(R.id.container, fragmentToOpen, currentFragment);
@@ -99,17 +121,35 @@ public class MainActivity extends AppCompatActivity
 				transaction.commit();	}
 			catch (Exception e)
 			{
-				e.printStackTrace();	}
+				e.printStackTrace();	
+			}
 		}
 
-		
+
+
+
+
+//Initialize sqlite
 		recolectDataAdapter = new MySQLiteHelper(getApplicationContext());
 
 		return;
 	}
-	
-	public static void toast(String st){
-		Toast.makeText(mContext,st,1).show();
+
+
+
+
+
+
+
+
+
+
+
+
+//toast
+	public static void toast(String st)
+	{
+		Toast.makeText(mContext, st, 1).show();
 	}
 
 

@@ -1,5 +1,4 @@
 package com.servicel.system;
-
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
@@ -16,15 +15,16 @@ import java.text.*;
 import java.util.*;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.net.*;
 
+
 public class ShowOrCreateOrder extends Fragment
 {
 
-	private String idStr;
+
+//initialize
 	private TextView id;
 	private boolean edition;
 	LabeledSwitch powersOn;
@@ -32,39 +32,40 @@ public class ShowOrCreateOrder extends Fragment
     LabeledSwitch hasCover, hasSim, hasMemory, hasBattery, hasScrews;
     Button setDateButton;
 	ImageView back;
-    String	dateStr,timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, 
+    String receieveOk, idStr,dateStr,timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, 
 	depositStr, partsPriceStr, deadlineStr,powersOnStr_,hasCoverStr_,hasSimStr_, hasMemoryStr_, hasBatteryStr_, hasScrewsStr_;
     Boolean powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, hasBatteryBool, hasScrewsBool;
     TextView statusText;
     MySQLiteHelper databaseHelper;
-    String receieveOk;
     Boolean status = false;
     View v;
-
 	boolean click = false;
 	private String isDeliveredStr_="Pendiente";
 
-	
-	
-	
-	
-	//Constructor
+
+
+
+
+//Constructor
 	public static ShowOrCreateOrder newInstance()
 	{
         ShowOrCreateOrder fragment = new ShowOrCreateOrder();
         return fragment;
     }
-	
-	
-	
-	
-	
-    //4----- get bundle from launcherActivity.java 
-    public static ShowOrCreateOrder newInstance(String idBundle,
-												 String dateBundle, String timeBundle, String nameBundle, String phoneBundle, String emailBundle, String imeiBundle, String brandBundle, String modelBundle, String colorBundle,
-												 String conditionsBundle, String passwordBundle, String kindOfServiceBundle, String totalPriceBundle, String depositBundle, String partsPriceBundle, String deadlineBundle,
-												 String powersOnBundle, String hasCoverBundle, String hasSimBundle, String hasMemoryBundle, String hasBatteryBundle, String hasScrewsBundle, String isDeliveredBundle
-												 ){
+
+
+
+
+
+
+//call fragment and retrieve bundle
+    public static ShowOrCreateOrder newInstance(
+		String idBundle,
+		String dateBundle, String timeBundle, String nameBundle, String phoneBundle, String emailBundle, String imeiBundle, String brandBundle, String modelBundle, String colorBundle,
+		String conditionsBundle, String passwordBundle, String kindOfServiceBundle, String totalPriceBundle, String depositBundle, String partsPriceBundle, String deadlineBundle,
+		String powersOnBundle, String hasCoverBundle, String hasSimBundle, String hasMemoryBundle, String hasBatteryBundle, String hasScrewsBundle, String isDeliveredBundle
+	)
+	{
 		ShowOrCreateOrder fragment = new ShowOrCreateOrder();
 		Bundle args = new Bundle();
 		args.putString("id", idBundle);
@@ -90,17 +91,18 @@ public class ShowOrCreateOrder extends Fragment
 		args.putString("hasmemory", hasMemoryBundle);
 		args.putString("hasbattery", hasBatteryBundle);
 		args.putString("hasscrews", hasScrewsBundle);
-		args.putString("isdelivered",isDeliveredBundle);
+		args.putString("isdelivered", isDeliveredBundle);
 		fragment.setArguments(args);
 		return fragment;
     }
 
 
-	
-	
-	
-	
-    //5---set args to this fragment
+
+
+
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -128,19 +130,21 @@ public class ShowOrCreateOrder extends Fragment
 		hasBatteryStr_ = getArguments().getString("hasbattery");
 		hasScrewsStr_ = getArguments().getString("hasscrews");
 		isDeliveredStr_ = getArguments().getString("isdelivered");
-
 		super.onCreate(savedInstanceState);
 		this.setRetainInstance(false);
     }
 
-	
-	
-	
-	
+
+
+
+
+
+
 	//OnCreate
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
-							 Bundle savedInstanceState){
+							 Bundle savedInstanceState)
+	{
         View v = inflater.inflate(R.layout.neworder, container, false);
 		id = v.findViewById(R.id.idText);
 		date = v.findViewById(R.id.edDate);
@@ -169,22 +173,26 @@ public class ShowOrCreateOrder extends Fragment
 		setDateButton = v.findViewById(R.id.setDateButton);
 		back = v.findViewById(R.id.backButton);
 
-		
-		
-		//bottom bar
-		BottomNavigationView navigation = (BottomNavigationView) v.findViewById(R.id.navigation);
+
+
+
+
+
+
+
+//bottom bar
+		BottomNavigationView navigation = v.findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-		
-		
-		
-		
-		
-		
 
-		//Set saved data and disable fields
-		//If new order
-		if (dateStr.isEmpty())//if we did not receive date string from db means that is new order
+
+
+
+
+
+
+//Set saved data and disable fields
+		if (dateStr.isEmpty())
 		{
 			SimpleDateFormat dateF = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 			SimpleDateFormat timeF = new SimpleDateFormat("hh:mm a", Locale.getDefault());
@@ -192,11 +200,10 @@ public class ShowOrCreateOrder extends Fragment
 			String time_ = timeF.format(Calendar.getInstance().getTime());
 			date.setText(date_);
 			time.setText(time_);
-			//entregar.setEnabled(false);
-			}
+		}
 		else
 		{
-			//If data received from db
+//If data received from db
 			date.setText(dateStr);
 			time.setText(timeStr);
 			name.setEnabled(false);
@@ -220,11 +227,13 @@ public class ShowOrCreateOrder extends Fragment
 			hasMemory.setEnabled(false);
 			hasScrews.setEnabled(false);
 			setDateButton.setEnabled(false);
-			//save.setEnabled(false);
-			//save.setTextColor(Color.parseColor("#26000000"));
-			//entregar.setEnabled(true);
 		}
 
+
+
+
+
+//set text
 		id.setText("ID " + idStr);
 		name.setText(nameStr);
 		phone.setText(phoneStr);
@@ -243,59 +252,60 @@ public class ShowOrCreateOrder extends Fragment
 		statusText.setText(isDeliveredStr_);
 		isEdited(false);
 
-		if (powersOnStr_.contains("1")){
+		if (powersOnStr_.contains("1"))
+		{
 			powersOn.setOn(true);
 			powersOn.setLabelOn("Si");
 		}
-		else{powersOn.setLabelOff("No");
+		else
+		{powersOn.setLabelOff("No");
 		}
-		if (hasCoverStr_.contains("1")){
+		if (hasCoverStr_.contains("1"))
+		{
 			hasCover.setOn(true);
 			hasCover.setLabelOn("Si");
 		}
-		else{hasCover.setLabelOff("No");
+		else
+		{hasCover.setLabelOff("No");
 		}
-		if (hasSimStr_.contains("1")){
+		if (hasSimStr_.contains("1"))
+		{
 			hasSim.setOn(true);
 			hasSim.setLabelOn("Si");
 		}
-		else{hasSim.setLabelOff("No");}
-		if (hasMemoryStr_.contains("1")){
+		else
+		{hasSim.setLabelOff("No");}
+		if (hasMemoryStr_.contains("1"))
+		{
 			hasMemory.setOn(true);
 			hasMemory.setLabelOn("Si");
 		}
-		else{hasMemory.setLabelOff("No");}
-		if (hasBatteryStr_.contains("1")){
+		else
+		{hasMemory.setLabelOff("No");}
+		if (hasBatteryStr_.contains("1"))
+		{
 			hasBattery.setOn(true);
 			hasBattery.setLabelOn("Si");
 		}
-		else{hasBattery.setLabelOff("No");}
-		if (hasScrewsStr_.contains("1")){
+		else
+		{hasBattery.setLabelOff("No");}
+		if (hasScrewsStr_.contains("1"))
+		{
 			hasScrews.setOn(true);
 			hasScrews.setLabelOn("Si");
 		}
-		else{hasScrews.setLabelOff("No");}
+		else
+		{hasScrews.setLabelOff("No");}
 
 		databaseHelper = new MySQLiteHelper(getActivity());
 		databaseHelper = databaseHelper.open();
-		final Calendar cal = Calendar.getInstance(TimeZone.getDefault()); // Get current date
-
-		
-		
-		
-		//dISABLE BUTTONS
-		if (name.getText().toString().isEmpty()){
-			//editButton.setEnabled(false);
-			//deleteButton.setEnabled(false);
-			//deleteButton.setTextColor(Color.parseColor("#26000000"));
-		}
 
 
 
 
 
-		
-		//Button set deadline
+//calendar deadline button
+		final Calendar cal = Calendar.getInstance(TimeZone.getDefault());
 		setDateButton.setOnClickListener(new OnClickListener(){
 
 				@Override
@@ -322,22 +332,32 @@ public class ShowOrCreateOrder extends Fragment
 
 					}};
 			});
-			
-			
-			
-			//call button
-			FloatingActionButton fab = v.findViewById(R.id.callFab);
+
+
+
+
+
+
+
+
+
+//call button
+		FloatingActionButton fab = v.findViewById(R.id.callFab);
 		fab.setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(View view) {
+				public void onClick(View view)
+				{
 					click = !click;
-					if((phone.getText().toString()).matches("")){
+					if ((phone.getText().toString()).matches(""))
+					{
 						toast("No hay número guardado");
-					}else
-					{Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString()));
-					startActivity(intent);
 					}
-					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+					else
+					{Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString()));
+						startActivity(intent);
+					}
+					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
+					{
 						Interpolator interpolador = AnimationUtils.loadInterpolator(getActivity(),
 																					android.R.interpolator.fast_out_slow_in);
 
@@ -348,8 +368,18 @@ public class ShowOrCreateOrder extends Fragment
 					}
 				}
 			});
-			
-			//back buttom 
+
+
+
+
+
+
+
+
+
+
+
+//back buttom 
 		back.setOnClickListener(new OnClickListener(){
 
 				@Override
@@ -381,28 +411,45 @@ public class ShowOrCreateOrder extends Fragment
 					dialog2.show();
 				}
 			});
-			
 
-			
-			
-			
-			
-			
-			
-			
-			//Hide keyboard
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Hide keyboard
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+
+
+
+
+
+
+
 
 
 		return v;
     }
 
-	
-	
-	
-	
-	
-    
+
+
+
+
+
+
+
+
+
+
 //------------------------------------------METHODS------------------------------------//**
 	private void enableall()
 	{
@@ -427,51 +474,91 @@ public class ShowOrCreateOrder extends Fragment
 		hasMemory.setEnabled(true);
 		hasScrews.setEnabled(true);
 		setDateButton.setEnabled(true);
-		//save.setEnabled(true);
-		//save.setTextColor(Color.parseColor("#34A853"));
 	}
 
+
+
+
+
+
+
+//edited
 	private void isEdited(boolean p0)
 	{
 		edition = p0;
 	}
-	
+
+
+
+
+
+
+
+
+//update db 
 	public void updateRow(String idStr, String dateStr, String timeStr, String nameStr, String phoneStr, String emailStr, 
-	String imeiStr, String brandStr, String modelStr, String colorStr, String conditionsStr, String passwordStr, 
-	String kindOfServiceStr,String totalPriceStr,String depositStr,String partsPriceStr, String deadlineStr, 
-	Boolean powersOnBool, Boolean hasCoverBool, Boolean hasSimBool, Boolean hasMemoryBool, Boolean hasBatteryBool, 
-	Boolean hasScrewsBool, String delivered)
+						  String imeiStr, String brandStr, String modelStr, String colorStr, String conditionsStr, String passwordStr, 
+						  String kindOfServiceStr, String totalPriceStr, String depositStr, String partsPriceStr, String deadlineStr, 
+						  Boolean powersOnBool, Boolean hasCoverBool, Boolean hasSimBool, Boolean hasMemoryBool, Boolean hasBatteryBool, 
+						  Boolean hasScrewsBool, String delivered)
 	{
 		DbEntryModel e = new DbEntryModel(
-		idStr,
-		dateStr, 
-		timeStr,nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
-											  conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
-											  partsPriceStr, deadlineStr, powersOnBool.toString(), hasCoverBool.toString(), hasSimBool.toString(), hasMemoryBool.toString(), 
-											  hasBatteryBool.toString(), hasScrewsBool.toString(),delivered);
+			idStr,
+			dateStr, 
+			timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
+			conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
+			partsPriceStr, deadlineStr, powersOnBool.toString(), hasCoverBool.toString(), hasSimBool.toString(), hasMemoryBool.toString(), 
+			hasBatteryBool.toString(), hasScrewsBool.toString(), delivered);
 		databaseHelper.updateEntry(e);
 		goBack();
 	}
 
+
+
+
+
+
+
+//back
 	private void goBack()
 	{
 		Intent upIntent = NavUtils.getParentActivityIntent(getActivity());
 		NavUtils.navigateUpTo(getActivity(), upIntent);		
 	}
 
-	
-	
+
+
+
+
+
+
+
+//toast
 	private void toast(String p0)
 	{
 		Toast.makeText(getActivity(), p0, Toast.LENGTH_LONG).show();
 	}
 
+
+
+
+
+
+
+//delete entry
 	private void deleteEntry(String idStr, String columnname)
 	{
-		databaseHelper.delete(idStr,columnname);
-		
+		databaseHelper.delete(idStr, columnname);
+
 	}
-	
+
+
+
+
+
+
+
+//clear
 	private void clear()
 	{
 		SimpleDateFormat dateF = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -502,154 +589,174 @@ public class ShowOrCreateOrder extends Fragment
 		deadline.setText("");
 		enableall();
 	}
-	
+
+
+
+
+
+
+
+
+//bottom nav view
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 	= new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-           switch (item.getItemId()) {
+        public boolean onNavigationItemSelected(@NonNull MenuItem item)
+		{
+			switch (item.getItemId())
+			{
                 case R.id.save:
-				   {
-					   //Get text from fields
-					   dateStr = date.getText().toString();
-					   timeStr = time.getText().toString();
-					   nameStr = name.getText().toString();
-					   phoneStr = phone.getText().toString();
-					   emailStr = email.getText().toString();
-					   imeiStr = imei.getText().toString();
-					   brandStr = brand.getText().toString();
-					   modelStr = model.getText().toString();
-					   colorStr = color.getText().toString();
-					   conditionsStr = conditions.getText().toString();
-					   passwordStr = password.getText().toString();
-					   kindOfServiceStr = kindOfService.getText().toString();
-					   totalPriceStr = totalPrice.getText().toString();
-					   depositStr = deposit.getText().toString();
-					   partsPriceStr = partsPrice.getText().toString();
-					   deadlineStr = deadline.getText().toString();
-					   powersOnBool = powersOn.isOn();
-					   hasCoverBool = hasCover.isOn();
-					   hasSimBool = hasSim.isOn();
-					   hasMemoryBool = hasMemory.isOn();
-					   hasBatteryBool = hasBattery.isOn();
-					   hasScrewsBool = hasScrews.isOn();
+					{
+						dateStr = date.getText().toString();
+						timeStr = time.getText().toString();
+						nameStr = name.getText().toString();
+						phoneStr = phone.getText().toString();
+						emailStr = email.getText().toString();
+						imeiStr = imei.getText().toString();
+						brandStr = brand.getText().toString();
+						modelStr = model.getText().toString();
+						colorStr = color.getText().toString();
+						conditionsStr = conditions.getText().toString();
+						passwordStr = password.getText().toString();
+						kindOfServiceStr = kindOfService.getText().toString();
+						totalPriceStr = totalPrice.getText().toString();
+						depositStr = deposit.getText().toString();
+						partsPriceStr = partsPrice.getText().toString();
+						deadlineStr = deadline.getText().toString();
+						powersOnBool = powersOn.isOn();
+						hasCoverBool = hasCover.isOn();
+						hasSimBool = hasSim.isOn();
+						hasMemoryBool = hasMemory.isOn();
+						hasBatteryBool = hasBattery.isOn();
+						hasScrewsBool = hasScrews.isOn();
 
-					   //Condition to save
-					   if (
-						   name.getText().toString().isEmpty())
-					   {toast("Escriba el nombre del Cliente");}
-					   //Save to db
-					   else
-					   {
-						   if (edition == false)
-						   {
-							   toast("edition false");
-							   //Create new row
-							   receieveOk = databaseHelper.insertEntry(dateStr, timeStr,nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
-																	   conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
-																	   partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
-																	   hasBatteryBool, hasScrewsBool,"Pendiente");
-							   goBack();
-						   }
-						   //Update
-						   if (edition == true)
-						   {
-							   toast("edition true");
-							   updateRow(idStr,dateStr, timeStr,nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
-										 conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
-										 partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
-										 hasBatteryBool, hasScrewsBool,isDeliveredStr_);
-						   }
-
-					   }
-				   }
-                    return true;
-					
-					
-					
-                case R.id.edit:
-				   if (name.getText().toString().isEmpty()){}
-				   else{
-				   enableall();
-				   isEdited(true);
-				   }
-                    return true;
-					
-					
-					
-                case R.id.clear:
-				   final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
-				   dialog.setTitle("Eliminar datos");
-				   dialog.setMessage("¿Seguro que desea restabecer los campos de texto?");
-				   dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Si",
-					   new DialogInterface.OnClickListener(){
-
-						   @Override
-						   public void onClick(DialogInterface p1, int p2)
-						   {
-							   clear();
-
-						   }
-
-					   });
-				   dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", 
-					   new DialogInterface.OnClickListener(){
-
-						   @Override
-						   public void onClick(DialogInterface p1, int p2)
-						   {
-							   dialog.dismiss();
-						   }
-					   });
-				   dialog.show();
-
-                    return true;
-					
-					
-					
-					
-					
-                case R.id.deleteOrder:
-				   {
-					   if (name.getText().toString().isEmpty()){toast("No existe orden que borrar");}else{
-						   
-					   final AlertDialog dialog2 = new AlertDialog.Builder(getActivity()).create();
-					   dialog2.setTitle("Eliminar Orden");
-					   dialog2.setMessage("¿Seguro que desea eliminar esta orden? Esto no se puede deshacer.");
-					   dialog2.setButton(AlertDialog.BUTTON_POSITIVE, "Si",
-						   new DialogInterface.OnClickListener(){
-
-							   @Override
-							   public void onClick(DialogInterface p1, int p2)
-							   {
-								   deleteEntry(idStr,nameStr);		
-								   goBack();
-
-							   }
-
-						   });
-					   dialog2.setButton(AlertDialog.BUTTON_NEGATIVE, "No", 
-						   new DialogInterface.OnClickListener(){
-
-							   @Override
-							   public void onClick(DialogInterface p1, int p2)
-							   {
-								   dialog2.dismiss();
-							   }
-						   });
-					   dialog2.show();
-				   }
-				   }
-                    return true;
-					
-					
-					case R.id.deliver:{
+						if (
+							name.getText().toString().isEmpty())
+						{toast("Escriba el nombre del Cliente");}
+						else
+						{
+							if (edition == false)
 							{
-								if (name.getText().toString().isEmpty()){toast("No existe orden que modificar");
-								}
-								else{
-								//Get text from fields
+								toast("edition false");
+								receieveOk = databaseHelper.insertEntry(dateStr, timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
+																		conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
+																		partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
+																		hasBatteryBool, hasScrewsBool, "Pendiente");
+								goBack();
+							}
+							if (edition == true)
+							{
+								toast("edition true");
+								updateRow(idStr, dateStr, timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
+										  conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
+										  partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
+										  hasBatteryBool, hasScrewsBool, isDeliveredStr_);
+							}
+
+						}
+					}
+                    return true;
+
+
+
+
+
+                case R.id.edit:
+					if (name.getText().toString().isEmpty())
+					{}
+					else
+					{
+						enableall();
+						isEdited(true);
+					}
+                    return true;
+
+
+
+
+
+                case R.id.clear:
+					final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+					dialog.setTitle("Eliminar datos");
+					dialog.setMessage("¿Seguro que desea restabecer los campos de texto?");
+					dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Si",
+						new DialogInterface.OnClickListener(){
+
+							@Override
+							public void onClick(DialogInterface p1, int p2)
+							{
+								clear();
+
+							}
+
+						});
+					dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", 
+						new DialogInterface.OnClickListener(){
+
+							@Override
+							public void onClick(DialogInterface p1, int p2)
+							{
+								dialog.dismiss();
+							}
+						});
+					dialog.show();
+
+                    return true;
+
+
+
+
+
+
+
+                case R.id.deleteOrder:
+					{
+						if (name.getText().toString().isEmpty())
+						{toast("No existe orden que borrar");}
+						else
+						{
+
+							final AlertDialog dialog2 = new AlertDialog.Builder(getActivity()).create();
+							dialog2.setTitle("Eliminar Orden");
+							dialog2.setMessage("¿Seguro que desea eliminar esta orden? Esto no se puede deshacer.");
+							dialog2.setButton(AlertDialog.BUTTON_POSITIVE, "Si",
+								new DialogInterface.OnClickListener(){
+
+									@Override
+									public void onClick(DialogInterface p1, int p2)
+									{
+										deleteEntry(idStr, nameStr);		
+										goBack();
+
+									}
+
+								});
+							dialog2.setButton(AlertDialog.BUTTON_NEGATIVE, "No", 
+								new DialogInterface.OnClickListener(){
+
+									@Override
+									public void onClick(DialogInterface p1, int p2)
+									{
+										dialog2.dismiss();
+									}
+								});
+							dialog2.show();
+						}
+					}
+                    return true;
+
+
+
+
+
+				case R.id.deliver:{
+						{
+							if (name.getText().toString().isEmpty())
+							{toast("No existe orden que modificar");
+							}
+							else
+							{
 								dateStr = date.getText().toString();
 								timeStr = time.getText().toString();
 								nameStr = name.getText().toString();
@@ -681,10 +788,10 @@ public class ShowOrCreateOrder extends Fragment
 										@Override
 										public void onClick(DialogInterface p1, int p2)
 										{
-											updateRow(idStr,dateStr, timeStr,nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
+											updateRow(idStr, dateStr, timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
 													  conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
 													  partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
-													  hasBatteryBool, hasScrewsBool,"Entregado");
+													  hasBatteryBool, hasScrewsBool, "Entregado");
 										}
 
 									});
@@ -699,18 +806,25 @@ public class ShowOrCreateOrder extends Fragment
 									});
 								dialog3.show();					
 							}
-					}
+						}
 					}
 					return true;
+
+
+
+
+
             }
             return false;
         }
     };
+
 	
-		
-	
-	
-	
-	
+
+
+
+
+
+
 
 }

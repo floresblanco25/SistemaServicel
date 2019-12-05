@@ -16,20 +16,20 @@ import java.util.*;
 import android.view.animation.AnimationUtils;
 import android.app.*;
 
-public class bClientsListFragment extends Fragment 
+public class ClientsListFragment extends Fragment 
 {
 
     private Button nOrder;
     MySQLiteHelper database;
     RecyclerView recyclerView;
-    cRecyclerAdapter recycler;
+    RecyclerAdapter recycler;
     List<recyclerRowModel> datamodel;
 
 	Boolean click = false;
 
-    public static bClientsListFragment newInstance()
+    public static ClientsListFragment newInstance()
     {
-        bClientsListFragment fragment = new bClientsListFragment();
+        ClientsListFragment fragment = new ClientsListFragment();
         return fragment;
     }
 
@@ -45,7 +45,7 @@ public class bClientsListFragment extends Fragment
 		datamodel = new ArrayList<recyclerRowModel>();
 		datamodel =  db.getColumnStrings(MainActivity.COLUMNNAME, MainActivity.COLUMNISDELIVERED);//Column names returned as array list from mysqlitehelper.getcolumnstrings(string columnname)
 		recyclerView = v.findViewById(R.id.recycler);
-		recycler = new cRecyclerAdapter(datamodel);//Passes a arraylist of recyclerrow model
+		recycler = new RecyclerAdapter(datamodel);//Passes a arraylist of recyclerrow model
 
 
 		LinearLayoutManager mLayoutManager =new LinearLayoutManager(this.getActivity());
@@ -74,7 +74,7 @@ public class bClientsListFragment extends Fragment
                             .setInterpolator(interpolador)
                             .start();
 					}
-						final Intent i = new Intent(getActivity(), cLauncherActivity.class);
+						final Intent i = new Intent(getActivity(), LauncherActivity.class);
 						final Bundle b = new Bundle();
 						b.putString("id", "");
 						b.putString("date", "");

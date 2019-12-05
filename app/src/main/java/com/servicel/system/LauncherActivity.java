@@ -9,7 +9,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
-public class cLauncherActivity extends Activity
+public class LauncherActivity extends Activity
 {
 
     Fragment fragmentToOpen;
@@ -78,7 +78,7 @@ public class cLauncherActivity extends Activity
 
 
 			// 3------ send bundle to ShowOrder.java
-			fragmentToOpen = dShowOrCreateOrder.newInstance(strId,
+			fragmentToOpen = ShowOrCreateOrder.newInstance(strId,
 															strDate, strTime, strName, strPhone, strEmail, strImei, strBrand, strModel, strColor,
 															strConditions, strPassword, strKindOfService, strTotalPrice, strDeposit, strPartsPrice, strDeadLine,
 															booPowersOn, booHasCover, booHasSim, booHasMemory, booHasBattery, booHasScrews, strIsDelivered

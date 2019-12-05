@@ -144,21 +144,21 @@ public class MySQLiteHelper
 	//Made for getting data from database 
 	//1-----this---then----DBENTRYMODEL.JAVA
 	//pedimos una lista de dbenteymodel objects que tenga datos cada uno 
-	public List<xxDbEntryModel> getDBENTRYMODELColumnStrings(String columnID, String columnDATE, String columnTIME, String columnNAME,
+	public List<DbEntryModel> getDBENTRYMODELColumnStrings(String columnID, String columnDATE, String columnTIME, String columnNAME,
 															 String columnPHONE, String columnEMAIL, String columnIMEI, String columnBRAND, String columnMODEL, String columnCOLOR,
 															 String columnCONDITIONS, String columnPASSWORD, String columnKINDOFSERVICE, String columnTOTALPRICE,
 															 String columnDEPOSIT, String columnPARTSPRICE, String columnDEADLINE, String columnPOWERSON, String columnHASCOVER,
 															 String columnHASSIM, String columnHASMEMORY, String columnHASBATTERY, String columnHASSCREWS, String columnIsDelivered
 															 )//a
     {
-        List<xxDbEntryModel> listOfDBENTRYMODEL=new ArrayList<>();
+        List<DbEntryModel> listOfDBENTRYMODEL=new ArrayList<>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " ;", null);
 		//vaciamos el objeto
-        xxDbEntryModel DBENTRYMODELobject = null; 
+        DbEntryModel DBENTRYMODELobject = null; 
         while (cursor.moveToNext())
 		{
-            DBENTRYMODELobject = new xxDbEntryModel(columnID, columnDATE, columnTIME, columnNAME,
+            DBENTRYMODELobject = new DbEntryModel(columnID, columnDATE, columnTIME, columnNAME,
 													columnPHONE, columnEMAIL, columnIMEI, columnBRAND, columnMODEL, columnCOLOR,
 													columnCONDITIONS, columnPASSWORD, columnKINDOFSERVICE, columnTOTALPRICE,
 													columnDEPOSIT, columnPARTSPRICE, columnDEADLINE, columnPOWERSON, columnHASCOVER,
@@ -233,7 +233,7 @@ public class MySQLiteHelper
 	
 	
 	//Update
-	public int updateEntry(xxDbEntryModel entryModel)
+	public int updateEntry(DbEntryModel entryModel)
 	{
 
     	// 1. get reference to writable DB

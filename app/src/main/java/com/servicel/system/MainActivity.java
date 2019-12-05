@@ -1,14 +1,15 @@
 package com.servicel.system;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.app.*;
+import android.content.*;
+import android.graphics.*;
+import android.os.*;
+import android.support.v7.app.*;
+import android.support.v7.widget.*;
+import android.view.*;
+import android.widget.*;
+import com.servicel.system.db.*;
+
 import android.support.v7.widget.Toolbar;
-import android.widget.FrameLayout;
-import android.widget.Toast;
-import com.servicel.system.db.MySQLiteHelper;
 
 
 
@@ -60,6 +61,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR); 
+		}
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+		}
+		
 		
 		mTopToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mTopToolbar);
@@ -82,7 +89,7 @@ public class MainActivity extends AppCompatActivity
 
 
 			// 3------ send bundle to ShowOrder.java
-			fragmentToOpen = new bClientsListFragment();
+			fragmentToOpen = new ClientsListFragment();
 
 
 			try

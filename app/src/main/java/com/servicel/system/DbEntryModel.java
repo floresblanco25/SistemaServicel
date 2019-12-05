@@ -1,6 +1,6 @@
 package com.servicel.system;
 
-public class xxDbEntryModel
+public class DbEntryModel
 {
 
 	private String id;
@@ -29,11 +29,11 @@ public class xxDbEntryModel
 	private String columnIsDelivered;
 
 	//2----+--+--then go to recycler adapter
-	public xxDbEntryModel()
+	public DbEntryModel()
 	{}
 
 	//a set all 
-	public xxDbEntryModel(
+	public DbEntryModel(
 		String columnID,
 		String columnDATE, String columnTIME, String columnNAME,
 		String columnPHONE, String columnEMAIL, String columnIMEI, String columnBRAND, String columnMODEL, String columnCOLOR,

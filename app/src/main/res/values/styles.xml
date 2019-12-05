@@ -22,7 +22,7 @@
 		<item name="actionMenuTextColor">@android:color/white</item>
 		<item name="windowActionBar">true</item>
 		<item name="elevation">0dp</item>
-		<item name="android:background">@color/primary_dark</item>
+		<item name="android:background">@color/maintoolbar</item>
 
 	</style>
 

@@ -21,7 +21,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.net.*;
 
-public class dShowOrCreateOrder extends Fragment
+public class ShowOrCreateOrder extends Fragment
 {
 
 	private String idStr;
@@ -49,9 +49,9 @@ public class dShowOrCreateOrder extends Fragment
 	
 	
 	//Constructor
-	public static dShowOrCreateOrder newInstance()
+	public static ShowOrCreateOrder newInstance()
 	{
-        dShowOrCreateOrder fragment = new dShowOrCreateOrder();
+        ShowOrCreateOrder fragment = new ShowOrCreateOrder();
         return fragment;
     }
 	
@@ -60,12 +60,12 @@ public class dShowOrCreateOrder extends Fragment
 	
 	
     //4----- get bundle from launcherActivity.java 
-    public static dShowOrCreateOrder newInstance(String idBundle,
+    public static ShowOrCreateOrder newInstance(String idBundle,
 												 String dateBundle, String timeBundle, String nameBundle, String phoneBundle, String emailBundle, String imeiBundle, String brandBundle, String modelBundle, String colorBundle,
 												 String conditionsBundle, String passwordBundle, String kindOfServiceBundle, String totalPriceBundle, String depositBundle, String partsPriceBundle, String deadlineBundle,
 												 String powersOnBundle, String hasCoverBundle, String hasSimBundle, String hasMemoryBundle, String hasBatteryBundle, String hasScrewsBundle, String isDeliveredBundle
 												 ){
-		dShowOrCreateOrder fragment = new dShowOrCreateOrder();
+		ShowOrCreateOrder fragment = new ShowOrCreateOrder();
 		Bundle args = new Bundle();
 		args.putString("id", idBundle);
 		args.putString("date", dateBundle);
@@ -442,7 +442,7 @@ public class dShowOrCreateOrder extends Fragment
 	Boolean powersOnBool, Boolean hasCoverBool, Boolean hasSimBool, Boolean hasMemoryBool, Boolean hasBatteryBool, 
 	Boolean hasScrewsBool, String delivered)
 	{
-		xxDbEntryModel e = new xxDbEntryModel(
+		DbEntryModel e = new DbEntryModel(
 		idStr,
 		dateStr, 
 		timeStr,nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,

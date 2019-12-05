@@ -16,11 +16,11 @@ import com.servicel.system.drawables.*;
  * Created by gustavo.peiretti on 07/02/2017.
  */
 
-public class cRecyclerAdapter extends RecyclerView.Adapter<cRecyclerAdapter.ViewHolder>
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>
 {
     static List<recyclerRowModel> recyclerRowModelList;
     LinearLayout row;
-    public cRecyclerAdapter(List<recyclerRowModel> recyclerRowModelList)
+    public RecyclerAdapter(List<recyclerRowModel> recyclerRowModelList)
     {
         this.recyclerRowModelList = recyclerRowModelList;
     }
@@ -53,7 +53,7 @@ public class cRecyclerAdapter extends RecyclerView.Adapter<cRecyclerAdapter.View
 																   MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
 																   );
 		//con el objeto sacado segin la posision que clickeamos
-		xxDbEntryModel object = (xxDbEntryModel) listOfObjects.get(position);
+		DbEntryModel object = (DbEntryModel) listOfObjects.get(position);
 		//sacamos datos uno por uno del objeto que sacamos de la lista con getPosition();
 		String id = object.getID();
 		String date = object.getColumnDATE();
@@ -142,7 +142,7 @@ public class cRecyclerAdapter extends RecyclerView.Adapter<cRecyclerAdapter.View
 					@Override
 					public void onClick(View p1)
 					{
-						final Intent i = new Intent(p1.getContext(), cLauncherActivity.class);
+						final Intent i = new Intent(p1.getContext(), LauncherActivity.class);
 						final Bundle b = new Bundle();
 						Integer positionClicked = getPosition();
 						// 1----- send bundle to LauncherActivity.java
@@ -162,7 +162,7 @@ public class cRecyclerAdapter extends RecyclerView.Adapter<cRecyclerAdapter.View
 																				   MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
 																				   );
 						//con el objeto sacado segin la posision que clickeamos
-						xxDbEntryModel object = (xxDbEntryModel) listOfObjects.get(positionClicked);
+						DbEntryModel object = (DbEntryModel) listOfObjects.get(positionClicked);
 						//sacamos datos uno por uno del objeto que sacamos de la lista con getPosition();
 						String id = object.getID();
 						String date = object.getColumnDATE();

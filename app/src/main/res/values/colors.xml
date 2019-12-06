@@ -1,41 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!--Theme 1-->
-	<color name="backGround">@color/colorPrimary</color>
-	<color name="indicator">@color/colorAccent</color>
-	<color name="label">@color/colorAccentTwo</color>
-	<color name="bigPlayButton">@color/colorAccent</color>
-	<color name="smallPlayButton">#FFFFFF</color>
-	<color name="labelButtonBackground">@color/colorAccentThree</color>
-	<color name="wordCircle">@color/colorAccent</color>
-	<color name="card">#FFFFFF</color>
-	<color name="snack">@color/colorAccentFour</color>
-	<color name="textDrawable">@color/colorAccentDark</color>
-
-
-	<color name="colorPrimary">#FFFFFF</color>
-	<color name="colorPrimaryDark">#FFFFFF</color>
-	<color name="colorAccent">#EB4334</color>
-	<color name="colorAccentDark">#C34540</color>
-	<color name="colorAccentLight">#C96C6A</color>
-	<color name="colorAccentTwo">#4184F2</color>
-
-	<color name="colorAccentThree">#FABC04</color>
-	<color name="colorAccentFour">#34A853</color>
-	<color name="dimming">#26000000</color>
-	
-	<color name="ProgressBartextColor">#99000000</color>
-	
-	<color name="colorProgressBar">#FF9800</color>
-	<color name="colorProgressBarUnreached">#33FF9800</color>
-
-
 	<!--CircleProgressunits--> 
 	<color name="circleProgressUnits">#FF9100</color>
 	<color name="circleProgressFillUnits">#29D493</color>
 	<color name="circleProgressLockedUnits">#000000</color>
-
-
 
 	<!--app-->
 	<color name="primary">#fafafa</color>

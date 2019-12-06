@@ -1,6 +1,5 @@
 package com.servicel.system;
 
-
 import android.content.*;
 import android.os.*;
 import android.support.design.widget.*;
@@ -12,21 +11,26 @@ import com.servicel.system.*;
 import com.servicel.system.clientsrecycler.*;
 import com.servicel.system.db.*;
 import java.util.*;
-
 import android.view.animation.AnimationUtils;
 import android.app.*;
 
+
+
 public class ClientsListFragment extends Fragment 
 {
-
-    private Button nOrder;
+//initialize
     MySQLiteHelper database;
     RecyclerView recyclerView;
     RecyclerAdapter recycler;
     List<recyclerRowModel> datamodel;
-
 	Boolean click = false;
 
+	
+	
+	
+	
+	
+//constructor
     public static ClientsListFragment newInstance()
     {
         ClientsListFragment fragment = new ClientsListFragment();
@@ -35,19 +39,31 @@ public class ClientsListFragment extends Fragment
 
 
 
+	
+	
+	
+	
+	
+	
+	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 							 Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.mainpage, container, false);
 
+		
+		
+		
+		
+		
+		
+//sqlite plus recyclerview
 		MySQLiteHelper db = new MySQLiteHelper(this.getActivity());
 		datamodel = new ArrayList<recyclerRowModel>();
 		datamodel =  db.getColumnStrings(MainActivity.COLUMNNAME, MainActivity.COLUMNISDELIVERED);//Column names returned as array list from mysqlitehelper.getcolumnstrings(string columnname)
 		recyclerView = v.findViewById(R.id.recycler);
-		recycler = new RecyclerAdapter(datamodel);//Passes a arraylist of recyclerrow model
-
-
+		recycler = new RecyclerAdapter(datamodel);
 		LinearLayoutManager mLayoutManager =new LinearLayoutManager(this.getActivity());
 		mLayoutManager.setReverseLayout(true);
 		mLayoutManager.setStackFromEnd(true);
@@ -57,7 +73,13 @@ public class ClientsListFragment extends Fragment
 
 
 
-
+		
+		
+		
+		
+		
+		
+//add new entry button
 		FloatingActionButton fab = v.findViewById(R.id.newOrder);
 		fab.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -102,8 +124,6 @@ public class ClientsListFragment extends Fragment
 
 						i.putExtras(b);
 						getActivity().startActivity(i);
-
-
 				}
 			});
 

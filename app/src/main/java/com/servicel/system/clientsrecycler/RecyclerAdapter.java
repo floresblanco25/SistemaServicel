@@ -1,6 +1,4 @@
 package com.servicel.system.clientsrecycler;
-
-
 import android.content.*;
 import android.os.*;
 import android.support.v7.widget.*;
@@ -18,6 +16,9 @@ import com.servicel.system.drawables.*;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>
 {
+
+
+//constructor
     static List<recyclerRowModel> recyclerRowModelList;
     LinearLayout row;
     public RecyclerAdapter(List<recyclerRowModel> recyclerRowModelList)
@@ -25,6 +26,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.recyclerRowModelList = recyclerRowModelList;
     }
 
+
+
+
+
+
+//inflate
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
@@ -33,28 +40,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return viewHolder;
     }
 
+
+
+
+
+
+//bind
     @Override
     public void onBindViewHolder(ViewHolder xmlRow, int position)
     {
-		// 1----- send bundle to LauncherActivity.java
 		MySQLiteHelper database = new MySQLiteHelper(xmlRow.context);
-
-
-		//3 job getting data then go to mysqlitehelper
-		//desde la db
-		//recibimos una lista con objetos que cada uno tienen datos colo fecha nombre etc y con get(id=posision) obtenemos un objeto de la lista 
-		List listOfObjects = database.getDBENTRYMODELColumnStrings(MainActivity.COLUMNID,
-																   MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
-																   MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
-																   MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
-																   MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
-																   MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
-																   MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
-																   MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
-																   );
-		//con el objeto sacado segin la posision que clickeamos
+		List listOfObjects = database.getDBENTRYMODELColumnStrings(
+			MainActivity.COLUMNID,
+			MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
+			MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
+			MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
+			MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
+			MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
+			MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
+			MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
+		);
 		DbEntryModel object = (DbEntryModel) listOfObjects.get(position);
-		//sacamos datos uno por uno del objeto que sacamos de la lista con getPosition();
 		String id = object.getID();
 		String date = object.getColumnDATE();
 		String time = object.getColumnTIME();
@@ -79,64 +85,88 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 		String hasbattery = object.getColumnHASBATTERY();
 		String hasscrews = object.getColumnHASSCREWS();
 		String isDelivered = object.getColumnIsDelivered();
-		
-		
+
+
 		recyclerRowModel dataModel=recyclerRowModelList.get(position);
         xmlRow.rowTitle.setText(dataModel.getName());
-		xmlRow.rowdetails.setText(brand+" "+model+", "+date+". ");
-		xmlRow.rowstatus.setText(isDelivered+" "+deadline+".");
-		if(dataModel.getstatus().contains("Entregado")){
+		xmlRow.rowdetails.setText(brand + " " + model + ", " + date + ". ");
+		xmlRow.rowstatus.setText(isDelivered + " " + deadline + ".");
+		if (dataModel.getstatus().contains("Entregado"))
+		{
 			xmlRow.c3.setMax(100);
 			xmlRow.c3.setProgress(100);
 			xmlRow.c3.fillCircle(true);
 			xmlRow.c3.setProgressColor(xmlRow.fillColor);
-			
-			
-		xmlRow.check.setImageResource(R.drawable.baseline_check_white_18);
-		}else{
+
+
+			xmlRow.check.setImageResource(R.drawable.baseline_check_white_18);
+		}
+		else
+		{
 			xmlRow.check.setImageResource(R.drawable.baseline_build_black_18);
 			xmlRow.c3.fillCircle(false);
 			xmlRow.c3.setProgressColor(xmlRow.progressColor);
 			xmlRow.c3.setProgress(45);
 			xmlRow.c3.setBackColor("#26000000");
-			
+
 		}
-		
-		
+
+
     }
 
+
+
+
+
+
+//count
     @Override
     public int getItemCount()
     {
         return recyclerRowModelList.size();
     }
 
+
+
+
+
+
+
+//viewholder class
     public static class ViewHolder extends RecyclerView.ViewHolder 
     {
+
+//initialize
         private TextView rowTitle,rowdetails,rowstatus;
 		private Context context;
 		private ImageView check;
-
 		private CircularProgressBar c3;
-
 		private String progressColor;
-
 		private int lockedColor;
-
 		private String fillColor;
+
+
+
+//view holder
         public ViewHolder(final View v)
 		{
             super(v);
+//initialize
             rowTitle = v.findViewById(R.id.clientNameRow);
 			rowdetails = v.findViewById(R.id.info);
 			rowstatus = v.findViewById(R.id.rowStatus);
-			check= v.findViewById(R.id.statusImage);
+			check = v.findViewById(R.id.statusImage);
 			c3 = v.findViewById(R.id.circularProgressBar);
 			progressColor = v.getContext().getResources().getString(R.color.circleProgressUnits);
 			fillColor = v.getContext().getResources().getString(R.color.circleProgressFillUnits);
 			lockedColor = v.getContext().getResources().getColor(R.color.circleProgressLockedUnits);
-			
 			context = v.getContext();
+
+
+
+
+
+//view click
 			v.setOnClickListener(new OnClickListener(){
 
 					@Override
@@ -145,25 +175,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 						final Intent i = new Intent(p1.getContext(), LauncherActivity.class);
 						final Bundle b = new Bundle();
 						Integer positionClicked = getPosition();
-						// 1----- send bundle to LauncherActivity.java
 						MySQLiteHelper database = new MySQLiteHelper(p1.getContext());
-
-
-						//3 job getting data then go to mysqlitehelper
-						//desde la db
-						//recibimos una lista con objetos que cada uno tienen datos colo fecha nombre etc y con get(id=posision) obtenemos un objeto de la lista 
-						List listOfObjects = database.getDBENTRYMODELColumnStrings(MainActivity.COLUMNID,
-																				   MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
-																				   MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
-																				   MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
-																				   MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
-																				   MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
-																				   MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
-																				   MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
-																				   );
-						//con el objeto sacado segin la posision que clickeamos
+						List listOfObjects = database.getDBENTRYMODELColumnStrings(
+							MainActivity.COLUMNID,
+							MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
+							MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
+							MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
+							MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
+							MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
+							MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
+							MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
+						);
 						DbEntryModel object = (DbEntryModel) listOfObjects.get(positionClicked);
-						//sacamos datos uno por uno del objeto que sacamos de la lista con getPosition();
 						String id = object.getID();
 						String date = object.getColumnDATE();
 						String time = object.getColumnTIME();
@@ -189,7 +212,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 						String hasscrews = object.getColumnHASSCREWS();
 						String isDelivered = object.getColumnIsDelivered();
 
-//												//3 job getting data then go to mysqlitehelper
 						b.putString("id", id);
 						b.putString("date", date);
 						b.putString("time", time);
@@ -214,12 +236,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 						b.putString("hasbattery", hasbattery);
 						b.putString("hasscrews", hasscrews);
 						b.putString("isdelivered", isDelivered);
-
 						i.putExtras(b);
 						p1.getContext().startActivity(i);
 					}
 				});
+
         }
+
+
     }
+	
 
 }

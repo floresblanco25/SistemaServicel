@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.servicel.system.cLauncherActivity"
+            android:name="com.servicel.system.LauncherActivity"
             android:label="@string/app_name"
             android:parentActivityName="com.servicel.system.MainActivity" >
             <meta-data

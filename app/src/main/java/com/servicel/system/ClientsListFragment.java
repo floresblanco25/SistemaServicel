@@ -1,18 +1,20 @@
 package com.servicel.system;
 
+import android.app.*;
 import android.content.*;
+import android.graphics.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v7.widget.*;
 import android.view.*;
 import android.view.animation.*;
 import android.widget.*;
-import com.servicel.system.*;
 import com.servicel.system.clientsrecycler.*;
 import com.servicel.system.db.*;
 import java.util.*;
+
 import android.view.animation.AnimationUtils;
-import android.app.*;
+import android.view.animation.Interpolator;
 
 
 
@@ -50,8 +52,19 @@ public class ClientsListFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 							 Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.mainpage, container, false);
-
+        View v = inflater.inflate(R.layout.clientslistfr, container, false);
+		
+		
+		
+		
+		
+		
+//Typeface
+		TextView toolTit = v.findViewById(R.id.toolbar_title);
+		Typeface font = Typeface.createFromAsset(
+			getActivity().getAssets(), 
+			"facebook-letter-faces.ttf");
+			toolTit.setTypeface(font);
 		
 		
 		
@@ -127,10 +140,9 @@ public class ClientsListFragment extends Fragment
 				}
 			});
 
-
-
-
-
+			
+			
+			
 
 
 

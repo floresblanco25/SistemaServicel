@@ -89,13 +89,13 @@ public class MainActivity extends AppCompatActivity
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		mContext = this.getApplicationContext();
-
-
-
-
-
-
-
+		
+		
+		
+		
+		
+		
+		
 
 //instance
 		if (savedInstanceState != null)

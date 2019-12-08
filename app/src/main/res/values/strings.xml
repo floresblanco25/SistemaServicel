@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="backup">Respaldar datos</string>
+    <string name="restore">Restaurar datos</string>
+
 
     <string name="app_name">Servicio Celular</string>
     <string name="hello_world">Hello world!</string>

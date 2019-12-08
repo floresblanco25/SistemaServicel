@@ -60,11 +60,14 @@ public class ClientsListFragment extends Fragment
 		
 		
 //Typeface
-		TextView toolTit = v.findViewById(R.id.toolbar_title);
+		MainActivity.overrideFonts(getActivity(),v);
 		Typeface font = Typeface.createFromAsset(
-			getActivity().getAssets(), 
+		getActivity().getAssets(), 
 			"facebook-letter-faces.ttf");
-			toolTit.setTypeface(font);
+		TextView toolTit = v.findViewById(R.id.toolbar_title);
+		toolTit.setTypeface(font);
+			
+			
 		
 		
 		

@@ -1,14 +1,17 @@
 package com.servicel.system;
 import android.app.*;
 import android.content.*;
-import android.graphics.*;
 import android.os.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.*;
 import android.view.*;
 import android.widget.*;
 import com.servicel.system.db.*;
+import nl.psdcompany.duonavigationdrawer.views.*;
+import nl.psdcompany.duonavigationdrawer.widgets.*;
+
 import android.support.v7.widget.Toolbar;
+import android.graphics.*;
 
 
 public class MainActivity extends AppCompatActivity
@@ -47,6 +50,11 @@ public class MainActivity extends AppCompatActivity
     public static String currentFragment="current";
 	public static String tagShowOrder = "shororder";
 	public static String COLUMNISDELIVERED="ISDELIVERED";
+	private DuoDrawerLayout drawerLayout;
+	private DuoDrawerToggle drawerToggle;
+	private TextView menuTitle;
+
+	private View view;
 
 
 
@@ -61,6 +69,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+		view = findViewById(R.id.drawer);
 
 
 
@@ -94,9 +103,32 @@ public class MainActivity extends AppCompatActivity
 		
 		
 		
+//typeface
+		overrideFonts(this,view);
+		Typeface font = Typeface.createFromAsset(
+		getAssets(), 
+		"facebook-letter-faces.ttf");
+		menuTitle = findViewById(R.id.menuTitlev);
+		menuTitle.setTypeface(font);
 		
 		
+		
+		
+		
+		
+//drawer
+		drawerLayout = findViewById(R.id.drawer);
+		drawerToggle = new DuoDrawerToggle(this, drawerLayout, toolbar,
+														   R.string.navigation_drawer_open,
+														   R.string.navigation_drawer_close);
 
+		drawerLayout.setDrawerListener(drawerToggle);
+		drawerToggle.syncState();
+		
+		
+		
+		
+		
 //instance
 		if (savedInstanceState != null)
 		{
@@ -153,5 +185,39 @@ public class MainActivity extends AppCompatActivity
 	}
 
 
+	
+	
+	
+	//menu button
+	public void openCloseMenu(View view){
+		
+		drawerLayout.openDrawer();
+	};
+	
+	
+	
+	
+	
+	
+	
+//font
+	public static void overrideFonts(final Context context, final View v) {
+		try {
+			if (v instanceof ViewGroup) {
+				ViewGroup vg = (ViewGroup) v;
+				for (int i = 0; i < vg.getChildCount(); i++) {
+					View child = vg.getChildAt(i);
+					overrideFonts(context, child);
+				}
+			} else if (v instanceof TextView ) {
+				((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "GoogleSans-Regular.ttf"));
+			}
+		} catch (Exception e) {
+		}
+	}
+
+
+
+	
 }
 

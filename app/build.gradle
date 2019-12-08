@@ -5,13 +5,13 @@ repositories {
 		maven { url 'https://jitpack.io' }
 		}
 android {
-    compileSdkVersion 21
-    buildToolsVersion "27.+"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.1"
 
     defaultConfig {
         applicationId "com.servicel.system"
         minSdkVersion 15
-        targetSdkVersion 21
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -25,10 +25,11 @@ android {
 
 
 dependencies {
+	api project(':duo-navigation-drawer')
 	compile ('android.arch.core:runtime:+'){force = true}
 	api 'com.android.support:design:27.+'
 	api 'com.android.support:recyclerview-v7:27.+'
-	api 'com.android.support:appcompat-v7:27.+'
+	api 'com.android.support:appcompat-v7:27.0.1'
 	api 'com.github.angads25:toggle:1.0.0'
 	implementation 'com.libizo:customedittext:1.0.6'
 

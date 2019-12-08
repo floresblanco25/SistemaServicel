@@ -4,6 +4,6 @@
     <string name="app_name">Servicio Celular</string>
     <string name="hello_world">Hello world!</string>
 	<string name="servicell_system">Servicio Celular</string>
-		
+	<string name="search">Búsqueda</string>
 
 </resources>

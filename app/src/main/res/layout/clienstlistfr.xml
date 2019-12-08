@@ -6,7 +6,6 @@
 	android:layout_height="match_parent">
 
 	<android.support.v7.widget.Toolbar
-		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
@@ -21,23 +20,44 @@
 			android:layout_width="match_parent"
 			android:orientation="horizontal"
 			android:elevation="0dp"
-			android:gravity="left|center_vertical">
+			android:gravity="left|center_vertical"
+			android:layout_marginLeft="@dimen/sidemargin"
+			android:layout_marginRight="@dimen/sidemargin">
+
+			<ImageView
+				android:src="@drawable/outline_notes_black_24"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="@dimen/menuiconmargin"/>
 
 			<TextView
-				android:paddingLeft="8dp"
 				android:text="@string/app_name"
 				android:id="@+id/toolbar_title"
-				android:layout_width="match_parent"
+				android:layout_marginLeft="@dimen/sidemargin"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="@color/toolbartext"
 				android:gravity="left"
 				android:textSize="21sp"
-				android:textStyle="bold"
-			/>
+				android:textStyle="bold"/>
+
+			<com.libizo.CustomEditText
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/searchpadding"
+				android:hint="@string/search"
+				android:inputType="textNoSuggestions"
+				app:libIZO_clearIconTint="@color/clearIcon"
+				app:libIZO_setBackgroundColor="@color/edTextColor"
+				app:libIZO_setBorderView="true"
+				app:libIZO_setClearIconVisible="true"
+				app:libIZO_setCornerRadius="48dp"
+				app:libIZO_setStrokeWidth="0dp"/>
 
 		</LinearLayout>
 
 	</android.support.v7.widget.Toolbar>
+
 	<FrameLayout
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"

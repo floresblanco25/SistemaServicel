@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.servicel.system"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -30,5 +30,7 @@ dependencies {
 	api 'com.android.support:recyclerview-v7:27.+'
 	api 'com.android.support:appcompat-v7:27.+'
 	api 'com.github.angads25:toggle:1.0.0'
+	implementation 'com.libizo:customedittext:1.0.6'
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

@@ -52,7 +52,7 @@ public class ClientsListFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 							 Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.clientslistfr, container, false);
+        View v = inflater.inflate(R.layout.clienstlistfr, container, false);
 		
 		
 		

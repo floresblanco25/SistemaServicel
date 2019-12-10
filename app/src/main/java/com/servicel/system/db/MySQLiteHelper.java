@@ -1,6 +1,5 @@
 package com.servicel.system.db;
 
-
 import android.content.*;
 import android.database.*;
 import android.database.sqlite.*;
@@ -14,9 +13,11 @@ import java.util.*;
 /**
  * Created by admin on 7/18/2016.
  */
+
+
+
 public class MySQLiteHelper
 {
-
     static final String DATABASE_NAME = "serviciocelular.db";
     String ok="OK";
     static final int DATABASE_VERSION = 1;
@@ -27,6 +28,15 @@ public class MySQLiteHelper
     private final Context context;
     private static SQLiteOpenHelper dbHelper;
     private static String TABLE_NAME = "CLIENTES";
+
+
+
+
+
+
+
+
+//Initialize dbhelper
     public  MySQLiteHelper(Context _context)
     {
         context = _context;
@@ -35,45 +45,49 @@ public class MySQLiteHelper
 
 
 
-    public String insertEntry(String dat, String tim, String nam, 
-							  String phon, String email_, String imei_, String brand_, 
-							  String model_, String color_, String conditions_, String password_, 
-							  String kindOfService_, String totalPrice_, String deposit_, 
-							  String partsPrice_, String deadline_, Boolean powersOn_, Boolean hasCover_, 
-							  Boolean hasSim_, Boolean hasMemory_, Boolean hasBattery_, Boolean hasScrews_, String isDelivered_)
-    {
+
+
+
+
+
+
+
+//Insert entry
+    public String insertEntry(
+		String mDate, String mTime, String mName, String mPhone, String mEmail, 
+		String mImei, String mBrand, String mModel, String mColor, 
+		String mConditions, String mPassword, String mKindOfService, 
+		String mTotalPrice, String mDeposit, String mPartsPrice, String mDeadline, 
+		Boolean mPowersOn, Boolean mHasCover, Boolean mHasSim, Boolean mHasMemory, 
+		Boolean mHasBattery, Boolean mHasScrews, String mIsDelivered)
+	{
 		try
 		{
-
             ContentValues newValues = new ContentValues();
-            // Assign values for each column. allof them have to be right 
-            newValues.put("DATE", dat);
-            newValues.put("TIME", tim);
-            newValues.put("NAME", nam);
-            newValues.put("PHONE", phon);
-			newValues.put("EMAIL", email_);
-			newValues.put("IMEI", imei_);
-			newValues.put("BRAND", brand_);
-			newValues.put("MODEL", model_);
-			newValues.put("COLOR", color_);
-			newValues.put("CONDITIONS", conditions_);
-			newValues.put("PASSWORD", password_);
-			newValues.put("KINDOFSERVICE", kindOfService_);
-			newValues.put("TOTALPRICE", totalPrice_);
-			newValues.put("DEPOSIT", deposit_);
-			newValues.put("PARTSPRICE", partsPrice_);
-			newValues.put("DEADLINE", deadline_);
-			newValues.put("POWERSON", powersOn_);
-			newValues.put("HASCOVER", hasCover_);
-			newValues.put("HASSIM", hasSim_);
-			newValues.put("HASMEMORY", hasMemory_);
-			newValues.put("HASBATTERY", hasBattery_);
-			newValues.put("HASSCREWS", hasScrews_);
-			newValues.put("ISDELIVERED", isDelivered_);
+            newValues.put("DATE", mDate);
+            newValues.put("TIME", mTime);
+            newValues.put("NAME", mName);
+            newValues.put("PHONE", mPhone);
+			newValues.put("EMAIL", mEmail);
+			newValues.put("IMEI", mImei);
+			newValues.put("BRAND", mBrand);
+			newValues.put("MODEL", mModel);
+			newValues.put("COLOR", mColor);
+			newValues.put("CONDITIONS", mConditions);
+			newValues.put("PASSWORD", mPassword);
+			newValues.put("KINDOFSERVICE", mKindOfService);
+			newValues.put("TOTALPRICE", mTotalPrice);
+			newValues.put("DEPOSIT", mDeposit);
+			newValues.put("PARTSPRICE", mPartsPrice);
+			newValues.put("DEADLINE", mDeadline);
+			newValues.put("POWERSON", mPowersOn);
+			newValues.put("HASCOVER", mHasCover);
+			newValues.put("HASSIM", mHasSim);
+			newValues.put("HASMEMORY", mHasMemory);
+			newValues.put("HASBATTERY", mHasBattery);
+			newValues.put("HASSCREWS", mHasScrews);
+			newValues.put("ISDELIVERED", mIsDelivered);
 
-
-
-            // Insert the row into your table
             db = dbHelper.getWritableDatabase();
             long result=db.insert("CLIENTES", null, newValues);
             System.out.print(result);
@@ -89,30 +103,35 @@ public class MySQLiteHelper
 		return ok;
     }
 
-    // Method to openthe Database
+
+
+
+
+
+
+// Method to openthe Database
     public  MySQLiteHelper open() throws SQLException
     {
         db = dbHelper.getWritableDatabase();        return this;
     }
 
-    // Method to close the Database
     public void close()
     {
         db.close();
     }
-
-    // method returns an Instance of the Database
     public  SQLiteDatabase getDatabaseInstance()
     {
         return db;
     }
 
 
+	
+	
 
 
 
 
-	//Made for clients list recycler
+//Made for clients list recycler
 	public List<recyclerRowModel> getColumnStrings(String columnNAME, String status)
     {
 		// DataModel dataModel = new DataModel();
@@ -135,36 +154,37 @@ public class MySQLiteHelper
         return data;
     }
 
-	
-	
-	
+
 	
 	
 
-	//Made for getting data from database 
-	//1-----this---then----DBENTRYMODEL.JAVA
-	//pedimos una lista de dbenteymodel objects que tenga datos cada uno 
-	public List<DbEntryModel> getDBENTRYMODELColumnStrings(String columnID, String columnDATE, String columnTIME, String columnNAME,
-															 String columnPHONE, String columnEMAIL, String columnIMEI, String columnBRAND, String columnMODEL, String columnCOLOR,
-															 String columnCONDITIONS, String columnPASSWORD, String columnKINDOFSERVICE, String columnTOTALPRICE,
-															 String columnDEPOSIT, String columnPARTSPRICE, String columnDEADLINE, String columnPOWERSON, String columnHASCOVER,
-															 String columnHASSIM, String columnHASMEMORY, String columnHASBATTERY, String columnHASSCREWS, String columnIsDelivered
-															 )//a
-    {
-        List<DbEntryModel> listOfDBENTRYMODEL=new ArrayList<>();
+
+
+
+
+//Made for getting data from database 
+	public List<DbEntryModel> getEntries(
+		String columnID, String columnDATE, String columnTIME, String columnNAME,
+		String columnPHONE, String columnEMAIL, String columnIMEI, String columnBRAND, String columnMODEL, String columnCOLOR,
+		String columnCONDITIONS, String columnPASSWORD, String columnKINDOFSERVICE, String columnTOTALPRICE,
+		String columnDEPOSIT, String columnPARTSPRICE, String columnDEADLINE, String columnPOWERSON, String columnHASCOVER,
+		String columnHASSIM, String columnHASMEMORY, String columnHASBATTERY, String columnHASSCREWS, String columnIsDelivered
+	)
+	{
+        List<DbEntryModel> listOfModels=new ArrayList<>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " ;", null);
-		//vaciamos el objeto
-        DbEntryModel DBENTRYMODELobject = null; 
+        DbEntryModel entryModel = null; 
+
         while (cursor.moveToNext())
 		{
-            DBENTRYMODELobject = new DbEntryModel(columnID, columnDATE, columnTIME, columnNAME,
-													columnPHONE, columnEMAIL, columnIMEI, columnBRAND, columnMODEL, columnCOLOR,
-													columnCONDITIONS, columnPASSWORD, columnKINDOFSERVICE, columnTOTALPRICE,
-													columnDEPOSIT, columnPARTSPRICE, columnDEADLINE, columnPOWERSON, columnHASCOVER,
-													columnHASSIM, columnHASMEMORY, columnHASBATTERY, columnHASSCREWS, columnIsDelivered);//b
-			//c     add another string
-			//obtiene la columna deseada mientras se mueve al proximo el cursor
+            entryModel = new DbEntryModel(
+				columnID, columnDATE, columnTIME, columnNAME,
+				columnPHONE, columnEMAIL, columnIMEI, columnBRAND, columnMODEL, columnCOLOR,
+				columnCONDITIONS, columnPASSWORD, columnKINDOFSERVICE, columnTOTALPRICE,
+				columnDEPOSIT, columnPARTSPRICE, columnDEADLINE, columnPOWERSON, columnHASCOVER,
+				columnHASSIM, columnHASMEMORY, columnHASBATTERY, columnHASSCREWS, columnIsDelivered);
+				
 			String id = cursor.getString(cursor.getColumnIndexOrThrow(columnID));
 			String date = cursor.getString(cursor.getColumnIndexOrThrow(columnDATE));
 			String time = cursor.getString(cursor.getColumnIndexOrThrow(columnTIME));
@@ -190,58 +210,51 @@ public class MySQLiteHelper
 			String hasscrews = cursor.getString(cursor.getColumnIndexOrThrow(columnHASSCREWS));
 			String isdelivered = cursor.getString(cursor.getColumnIndexOrThrow(columnIsDelivered));
 
-			//D SET COLUMN
-			//a cada dbentrymodel lo llenamos con los datos digamos unos 10 objetos llenados cada uno dependiendo cuantas entradas hay
-			DBENTRYMODELobject.setId(id);
-            DBENTRYMODELobject.setColumnDATE(date);
-			DBENTRYMODELobject.setColumnTIME(time);
-			DBENTRYMODELobject.setColumnNAME(name);
-			DBENTRYMODELobject.setColumnPHONE(phone);
-			DBENTRYMODELobject.setColumnEMAIL(email);
-			DBENTRYMODELobject.setColumnIMEI(imei);
-			DBENTRYMODELobject.setColumnBRAND(brand);
-			DBENTRYMODELobject.setColumnMODEL(model);
-			DBENTRYMODELobject.setColumnCOLOR(color);
-			DBENTRYMODELobject.setColumnCONDITIONS(conditions);
-			DBENTRYMODELobject.setColumnPASSWORD(password);
-			DBENTRYMODELobject.setColumnKINDOFSERVICE(kindofservice);
-			DBENTRYMODELobject.setColumnTOTALPRICE(totalprice);
-			DBENTRYMODELobject.setColumnDEPOSIT(deposit);
-			DBENTRYMODELobject.setColumnPARTSPRICE(partsprice);
-			DBENTRYMODELobject.setColumnDEADLINE(deadline);
-			DBENTRYMODELobject.setColumnPOWERSON(powerson);
-			DBENTRYMODELobject.setColumnHASCOVER(hascover);
-			DBENTRYMODELobject.setColumnHASSIM(hassim);
-			DBENTRYMODELobject.setColumnHASMEMORY(hasmemory);
-			DBENTRYMODELobject.setColumnHASBATTERY(hasbattery);
-			DBENTRYMODELobject.setColumnHASSCREWS(hasscrews);
-			DBENTRYMODELobject.setColumnIsDelivered(isdelivered);
+			entryModel.setId(id);
+            entryModel.setColumnDATE(date);
+			entryModel.setColumnTIME(time);
+			entryModel.setColumnNAME(name);
+			entryModel.setColumnPHONE(phone);
+			entryModel.setColumnEMAIL(email);
+			entryModel.setColumnIMEI(imei);
+			entryModel.setColumnBRAND(brand);
+			entryModel.setColumnMODEL(model);
+			entryModel.setColumnCOLOR(color);
+			entryModel.setColumnCONDITIONS(conditions);
+			entryModel.setColumnPASSWORD(password);
+			entryModel.setColumnKINDOFSERVICE(kindofservice);
+			entryModel.setColumnTOTALPRICE(totalprice);
+			entryModel.setColumnDEPOSIT(deposit);
+			entryModel.setColumnPARTSPRICE(partsprice);
+			entryModel.setColumnDEADLINE(deadline);
+			entryModel.setColumnPOWERSON(powerson);
+			entryModel.setColumnHASCOVER(hascover);
+			entryModel.setColumnHASSIM(hassim);
+			entryModel.setColumnHASMEMORY(hasmemory);
+			entryModel.setColumnHASBATTERY(hasbattery);
+			entryModel.setColumnHASSCREWS(hasscrews);
+			entryModel.setColumnIsDelivered(isdelivered);
 
-			//llenamos la lista con el dbentrymodel object digamos le metimos 10 objetos
-            listOfDBENTRYMODEL.add(DBENTRYMODELobject);
+            listOfModels.add(entryModel);
         }
 
-		//mandamos una lista con objetos que cada objeto lleva los datos como nombre fecha etc
-        return listOfDBENTRYMODEL;
+        return listOfModels;
     }
 
+
+
+
+
 	
 	
-	
-	
-	
-	
-	
-	//Update
+
+
+
+//Update
 	public int updateEntry(DbEntryModel entryModel)
 	{
-
-    	// 1. get reference to writable DB
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-		// 2. create ContentValues to add key "column"/value
         ContentValues newValues = new ContentValues();
-		//newValues.put("ID", entryModel.getID());
 		newValues.put("DATE", entryModel.getColumnDATE());
 		newValues.put("TIME", entryModel.getColumnTIME());
 		newValues.put("NAME", entryModel.getColumnNAME());
@@ -265,27 +278,28 @@ public class MySQLiteHelper
 		newValues.put("HASBATTERY", Boolean.valueOf(entryModel.getColumnHASBATTERY()));
 		newValues.put("HASSCREWS", Boolean.valueOf(entryModel.getColumnHASSCREWS()));
 		newValues.put("ISDELIVERED", entryModel.getColumnIsDelivered());
-
-        // 3. updating row
+		
         int i = db.update(TABLE_NAME, //table
 						  newValues, // column/value
 						  "ID" + " = ?", // selections
-						  new String[] { String.valueOf(entryModel.getID()) }); //selection args
-
-        // 4. close
+						  new String[] { String.valueOf(entryModel.getID()) });
         db.close();
 		Toast.makeText(context, "Cambios guardados", Toast.LENGTH_LONG).show();
-
         return i;
 
     }	
+
+
 	
 	
 	
 	
-	
-	//delete one row
-	public Boolean delete(String id, String columnname){
+
+
+
+//delete one row
+	public Boolean delete(String id, String columnname)
+	{
 		List<recyclerRowModel> data=new ArrayList<>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " ;", null);
@@ -293,7 +307,7 @@ public class MySQLiteHelper
         recyclerRowModel dataModel = null; 
         while (cursor.moveToNext())
 		{
-            dataModel = new recyclerRowModel("","",columnname);
+            dataModel = new recyclerRowModel("", "", columnname);
             String name = cursor.getString(cursor.getColumnIndexOrThrow("NAME"));
             dataModel.setName(name);
             stringBuffer.append(dataModel);
@@ -304,33 +318,12 @@ public class MySQLiteHelper
 		return db.delete(TABLE_NAME, "ID" + "=" + id, null) > 0;
 	}
 
-	
-	
-	
-	
-	
+
+
+
+
+
 	public static String DB_FILEPATH = "/data/data/com.servicel.system/databases/serviciocelular.db";
-
-	/**
-	 * Copies the database file at the specified location over the current
-	 * internal application database.
-	 * */
-	public boolean importDatabase(String dbPath) throws IOException {
-
-		// Close the SQLiteOpenHelper so it will commit the created empty
-		// database to internal storage.
-		close();
-		File newDb = new File(dbPath);
-		File oldDb = new File(DB_FILEPATH);
-		if (newDb.exists()) {
-			FileUtils.copyFile(new FileInputStream(newDb), new FileOutputStream(oldDb));
-			// Access the copied database so SQLiteHelper will cache it and mark
-			// it as created.
-			dbHelper.getWritableDatabase().close();
-			return true;
-		}
-		return false;
-	}
 
 }
 

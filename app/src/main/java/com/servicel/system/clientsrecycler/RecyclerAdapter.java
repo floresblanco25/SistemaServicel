@@ -50,7 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(ViewHolder xmlRow, int position)
     {
 		MySQLiteHelper database = new MySQLiteHelper(xmlRow.context);
-		List listOfObjects = database.getDBENTRYMODELColumnStrings(
+		List listOfObjects = database.getEntries(
 			MainActivity.COLUMNID,
 			MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
 			MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
@@ -176,7 +176,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 						final Bundle b = new Bundle();
 						Integer positionClicked = getPosition();
 						MySQLiteHelper database = new MySQLiteHelper(p1.getContext());
-						List listOfObjects = database.getDBENTRYMODELColumnStrings(
+						List listOfObjects = database.getEntries(
 							MainActivity.COLUMNID,
 							MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
 							MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,

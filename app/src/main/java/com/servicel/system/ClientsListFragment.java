@@ -24,7 +24,7 @@ public class ClientsListFragment extends Fragment
     MySQLiteHelper database;
     RecyclerView recyclerView;
     RecyclerAdapter recycler;
-    List<recyclerRowModel> datamodel;
+    List<DbEntryModel> datamodel;
 	Boolean click = false;
 
 	
@@ -76,8 +76,17 @@ public class ClientsListFragment extends Fragment
 		
 //sqlite plus recyclerview
 		MySQLiteHelper db = new MySQLiteHelper(this.getActivity());
-		datamodel = new ArrayList<recyclerRowModel>();
-		datamodel =  db.getColumnStrings(MainActivity.COLUMNNAME, MainActivity.COLUMNISDELIVERED);//Column names returned as array list from mysqlitehelper.getcolumnstrings(string columnname)
+		datamodel = new ArrayList<DbEntryModel>();
+		datamodel=db.getEntries(
+			MainActivity.COLUMNID,
+			MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
+			MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
+			MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
+			MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
+			MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
+			MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
+			MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
+		);
 		recyclerView = v.findViewById(R.id.recycler);
 		recycler = new RecyclerAdapter(datamodel);
 		LinearLayoutManager mLayoutManager =new LinearLayoutManager(this.getActivity());

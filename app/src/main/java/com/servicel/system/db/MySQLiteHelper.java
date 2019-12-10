@@ -132,27 +132,27 @@ public class MySQLiteHelper
 
 
 //Made for clients list recycler
-	public List<recyclerRowModel> getColumnStrings(String columnNAME, String status)
-    {
-		// DataModel dataModel = new DataModel();
-        List<recyclerRowModel> data=new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " ;", null);
-		StringBuffer stringBuffer = new StringBuffer();
-        recyclerRowModel dataModel = null; 
-        while (cursor.moveToNext())
-		{
-            dataModel = new recyclerRowModel("", status, columnNAME);
-            String name = cursor.getString(cursor.getColumnIndexOrThrow(columnNAME));
-			String st = cursor.getString(cursor.getColumnIndexOrThrow(status));
-            dataModel.setName(name);
-			dataModel.setstatus(st);
-            stringBuffer.append(dataModel);
-            data.add(dataModel);
-        }
-
-        return data;
-    }
+//	public List<DbEntryModel> getColumnStrings(String columnNAME, String status)
+//    {
+//		// DataModel dataModel = new DataModel();
+//        List<DbEntryModel> data=new ArrayList<>();
+//        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//        Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " ;", null);
+//		StringBuffer stringBuffer = new StringBuffer();
+//        DbEntryModel dataModel = null; 
+//        while (cursor.moveToNext())
+//		{
+//            dataModel = new DbEntryModel("", status, columnNAME);
+//            String name = cursor.getString(cursor.getColumnIndexOrThrow(columnNAME));
+//			String st = cursor.getString(cursor.getColumnIndexOrThrow(status));
+//            dataModel.setName(name);
+//			dataModel.setstatus(st);
+//            stringBuffer.append(dataModel);
+//            data.add(dataModel);
+//        }
+//
+//        return data;
+//    }
 
 
 	
@@ -300,21 +300,19 @@ public class MySQLiteHelper
 //delete one row
 	public Boolean delete(String id, String columnname)
 	{
-		List<recyclerRowModel> data=new ArrayList<>();
+		List<DbEntryModel> data=new ArrayList<>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " ;", null);
-		StringBuffer stringBuffer = new StringBuffer();
-        recyclerRowModel dataModel = null; 
+        DbEntryModel dataModel = null; 
         while (cursor.moveToNext())
 		{
-            dataModel = new recyclerRowModel("", "", columnname);
+            dataModel = new DbEntryModel("","", "", columnname,"","","","","","","","","","","","","","","","","","","","");
             String name = cursor.getString(cursor.getColumnIndexOrThrow("NAME"));
-            dataModel.setName(name);
-            stringBuffer.append(dataModel);
+            dataModel.setColumnNAME(name);
             data.add(dataModel);
         }
-		recyclerRowModel n = data.get(0);
-		Toast.makeText(context, n.getColumnName() + " borrado exitosamente", Toast.LENGTH_LONG).show();
+		DbEntryModel n = data.get(data.size()-1);
+		Toast.makeText(context, n.getColumnNAME() + " borrado exitosamente", Toast.LENGTH_LONG).show();
 		return db.delete(TABLE_NAME, "ID" + "=" + id, null) > 0;
 	}
 

@@ -19,15 +19,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
 //constructor
-    static List<DbEntryModel> recyclerRowModelList;
+	List<DbEntryModel> recyclerRowModelList;
     LinearLayout row;
+
+
+
+
+
+
     public RecyclerAdapter(List<DbEntryModel> recyclerRowModelList)
     {
         this.recyclerRowModelList = recyclerRowModelList;
     }
 
-	
-	public void filterList(ArrayList<DbEntryModel> filterdNames) {
+
+
+
+
+
+
+//filter
+	public void filterList(List<DbEntryModel> filterdNames)
+	{
         this.recyclerRowModelList = filterdNames;
         notifyDataSetChanged();
     }
@@ -55,18 +68,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder xmlRow, int position)
     {
-		MySQLiteHelper database = new MySQLiteHelper(xmlRow.context);
-		List listOfObjects = database.getEntries(
-			MainActivity.COLUMNID,
-			MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
-			MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
-			MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
-			MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
-			MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
-			MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
-			MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
-		);
-		DbEntryModel object = (DbEntryModel) listOfObjects.get(position);
+		DbEntryModel object = recyclerRowModelList.get(position);
+		String name = object.getColumnNAME();
 		String date = object.getColumnDATE();
 		String brand = object.getColumnBRAND();
 		String model = object.getColumnMODEL();
@@ -74,21 +77,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 		String isDelivered = object.getColumnIsDelivered();
 
 
-		DbEntryModel dataModel=recyclerRowModelList.get(position);
-        xmlRow.rowTitle.setText(dataModel.getColumnNAME());
+		
+		
+//set row texts
+        xmlRow.rowTitle.setText(name);
 		xmlRow.rowdetails.setText(brand + " " + model + ", " + date + ". ");
 		xmlRow.rowstatus.setText(isDelivered + " " + deadline + ".");
-		if (dataModel.getColumnIsDelivered().contains("Entregado"))
+		
+		
+		
+		
+		
+//set progress bar 
+		if (object.getColumnIsDelivered().contains("Entregado"))
 		{
 			xmlRow.c3.setMax(100);
 			xmlRow.c3.setProgress(100);
 			xmlRow.c3.fillCircle(true);
 			xmlRow.c3.setProgressColor(xmlRow.fillColor);
-
-
 			xmlRow.check.setImageResource(R.drawable.baseline_check_white_18);
-		}
-		else
+		}else
 		{
 			xmlRow.check.setImageResource(R.drawable.baseline_build_black_18);
 			xmlRow.c3.fillCircle(false);
@@ -120,7 +128,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
 //viewholder class
-    public static class ViewHolder extends RecyclerView.ViewHolder 
+    public class ViewHolder extends RecyclerView.ViewHolder 
     {
 
 //initialize
@@ -162,18 +170,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 						final Intent i = new Intent(p1.getContext(), LauncherActivity.class);
 						final Bundle b = new Bundle();
 						Integer positionClicked = getPosition();
-						MySQLiteHelper database = new MySQLiteHelper(p1.getContext());
-						List listOfObjects = database.getEntries(
-							MainActivity.COLUMNID,
-							MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
-							MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
-							MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
-							MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
-							MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
-							MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
-							MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
-						);
-						DbEntryModel object = (DbEntryModel) listOfObjects.get(positionClicked);
+						DbEntryModel object = recyclerRowModelList.get(positionClicked);
 						String id = object.getID();
 						String date = object.getColumnDATE();
 						String time = object.getColumnTIME();
@@ -232,6 +229,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
     }
-	
+
 
 }

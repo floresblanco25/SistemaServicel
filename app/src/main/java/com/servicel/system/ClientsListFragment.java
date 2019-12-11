@@ -204,17 +204,36 @@ public class ClientsListFragment extends Fragment
 	
 //filter
 	private void filter(String text) {
-        ArrayList<DbEntryModel> filterdNames = new ArrayList<>();
-		for (DbEntryModel s : datamodel)
+        ArrayList<DbEntryModel> filterdList = new ArrayList<>();
+		for (DbEntryModel model : datamodel)
 		{
-            if (s.getColumnNAME().toLowerCase().contains(text.toLowerCase()))
- {
-                filterdNames.add(s);
+            if (model.getColumnNAME().toLowerCase().contains(text.toLowerCase())
+				
+				){
+                filterdList.add(model);
             }
         }
 
-        adapter.filterList(filterdNames);
+        adapter.filterList(filterdList);
     }
 
 }
+
+
+
+
+
+
+
+
+
+//|
+//				model.getColumnKINDOFSERVICE().toLowerCase().contains(text.toLowerCase())|
+//				model.getColumnBRAND().toLowerCase().contains(text.toLowerCase())|
+//				model.getColumnCOLOR().toLowerCase().contains(text.toLowerCase())|
+//				model.getColumnCONDITIONS().toLowerCase().contains(text.toLowerCase())|
+//				model.getColumnEMAIL().toLowerCase().contains(text.toLowerCase())|
+//				model.getColumnMODEL().toLowerCase().contains(text.toLowerCase())|
+//				model.getColumnPHONE().toLowerCase().contains(text.toLowerCase())|
+//				model.getColumnDEADLINE().toLowerCase().contains(text.toLowerCase())
 	

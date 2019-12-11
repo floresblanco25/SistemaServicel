@@ -26,6 +26,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.recyclerRowModelList = recyclerRowModelList;
     }
 
+	
+	public void filterList(ArrayList<DbEntryModel> filterdNames) {
+        this.recyclerRowModelList = filterdNames;
+        notifyDataSetChanged();
+    }
+
 
 
 

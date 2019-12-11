@@ -131,33 +131,6 @@ public class MySQLiteHelper
 
 
 
-//Made for clients list recycler
-//	public List<DbEntryModel> getColumnStrings(String columnNAME, String status)
-//    {
-//		// DataModel dataModel = new DataModel();
-//        List<DbEntryModel> data=new ArrayList<>();
-//        SQLiteDatabase db = dbHelper.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " ;", null);
-//		StringBuffer stringBuffer = new StringBuffer();
-//        DbEntryModel dataModel = null; 
-//        while (cursor.moveToNext())
-//		{
-//            dataModel = new DbEntryModel("", status, columnNAME);
-//            String name = cursor.getString(cursor.getColumnIndexOrThrow(columnNAME));
-//			String st = cursor.getString(cursor.getColumnIndexOrThrow(status));
-//            dataModel.setName(name);
-//			dataModel.setstatus(st);
-//            stringBuffer.append(dataModel);
-//            data.add(dataModel);
-//        }
-//
-//        return data;
-//    }
-
-
-	
-	
-
 
 
 

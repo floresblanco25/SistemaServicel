@@ -46,6 +46,7 @@
 				android:textStyle="bold"/>
 
 			<com.libizo.CustomEditText
+				android:id="@+id/edSearch"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="@dimen/searchpadding"

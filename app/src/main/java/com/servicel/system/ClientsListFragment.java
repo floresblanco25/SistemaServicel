@@ -6,9 +6,11 @@ import android.graphics.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v7.widget.*;
+import android.text.*;
 import android.view.*;
 import android.view.animation.*;
 import android.widget.*;
+import com.libizo.*;
 import com.servicel.system.clientsrecycler.*;
 import com.servicel.system.db.*;
 import java.util.*;
@@ -23,9 +25,10 @@ public class ClientsListFragment extends Fragment
 //initialize
     MySQLiteHelper database;
     RecyclerView recyclerView;
-    RecyclerAdapter recycler;
-    List<recyclerRowModel> datamodel;
+    RecyclerAdapter adapter;
+    List<DbEntryModel> datamodel;
 	Boolean click = false;
+	CustomEditText edSearch;
 
 	
 	
@@ -53,7 +56,7 @@ public class ClientsListFragment extends Fragment
 							 Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.clienstlistfr, container, false);
-		
+		edSearch = v.findViewById(R.id.edSearch);
 		
 		
 		
@@ -76,16 +79,25 @@ public class ClientsListFragment extends Fragment
 		
 //sqlite plus recyclerview
 		MySQLiteHelper db = new MySQLiteHelper(this.getActivity());
-		datamodel = new ArrayList<recyclerRowModel>();
-		datamodel =  db.getColumnStrings(MainActivity.COLUMNNAME, MainActivity.COLUMNISDELIVERED);//Column names returned as array list from mysqlitehelper.getcolumnstrings(string columnname)
+		datamodel = new ArrayList<DbEntryModel>();
+		datamodel=db.getEntries(
+			MainActivity.COLUMNID,
+			MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
+			MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
+			MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
+			MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
+			MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
+			MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
+			MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
+		);
 		recyclerView = v.findViewById(R.id.recycler);
-		recycler = new RecyclerAdapter(datamodel);
+		adapter = new RecyclerAdapter(datamodel);
 		LinearLayoutManager mLayoutManager =new LinearLayoutManager(this.getActivity());
 		mLayoutManager.setReverseLayout(true);
 		mLayoutManager.setStackFromEnd(true);
 		recyclerView.setLayoutManager(mLayoutManager);
 		recyclerView.setItemAnimator(new DefaultItemAnimator());
-		recyclerView.setAdapter(recycler);
+		recyclerView.setAdapter(adapter);
 
 
 
@@ -142,6 +154,33 @@ public class ClientsListFragment extends Fragment
 						getActivity().startActivity(i);
 				}
 			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+//search edittext
+		edSearch.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable editable) {
+					filter(editable.toString());
+				}
+			});
 
 			
 			
@@ -152,6 +191,29 @@ public class ClientsListFragment extends Fragment
 
 
         return v;
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//filter
+	private void filter(String text) {
+        ArrayList<DbEntryModel> filterdNames = new ArrayList<>();
+		for (DbEntryModel s : datamodel)
+		{
+            if (s.getColumnNAME().toLowerCase().contains(text.toLowerCase()))
+ {
+                filterdNames.add(s);
+            }
+        }
+
+        adapter.filterList(filterdNames);
     }
 
 }

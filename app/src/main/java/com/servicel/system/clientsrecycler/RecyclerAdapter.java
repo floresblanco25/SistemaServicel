@@ -19,11 +19,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
 //constructor
-    static List<recyclerRowModel> recyclerRowModelList;
+    static List<DbEntryModel> recyclerRowModelList;
     LinearLayout row;
-    public RecyclerAdapter(List<recyclerRowModel> recyclerRowModelList)
+    public RecyclerAdapter(List<DbEntryModel> recyclerRowModelList)
     {
         this.recyclerRowModelList = recyclerRowModelList;
+    }
+
+	
+	public void filterList(ArrayList<DbEntryModel> filterdNames) {
+        this.recyclerRowModelList = filterdNames;
+        notifyDataSetChanged();
     }
 
 
@@ -61,37 +67,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 			MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
 		);
 		DbEntryModel object = (DbEntryModel) listOfObjects.get(position);
-		String id = object.getID();
 		String date = object.getColumnDATE();
-		String time = object.getColumnTIME();
-		String name = object.getColumnNAME();
-		String phone = object.getColumnPHONE();
-		String email = object.getColumnEMAIL();
-		String imei = object.getColumnIMEI();
 		String brand = object.getColumnBRAND();
 		String model = object.getColumnMODEL();
-		String color = object.getColumnCOLOR();
-		String conditions = object.getColumnCONDITIONS();
-		String password = object.getColumnPASSWORD();
-		String kindofservice = object.getColumnKINDOFSERVICE();
-		String totalprice = object.getColumnTOTALPRICE();
-		String deposit = object.getColumnDEPOSIT();
-		String partsprice = object.getColumnPARTSPRICE();
 		String deadline = object.getColumnDEADLINE();
-		String powerson = object.getColumnPOWERSON();
-		String hascover = object.getColumnHASCOVER();
-		String hassim = object.getColumnHASSIM();
-		String hasmemory = object.getColumnHASMEMORY();
-		String hasbattery = object.getColumnHASBATTERY();
-		String hasscrews = object.getColumnHASSCREWS();
 		String isDelivered = object.getColumnIsDelivered();
 
 
-		recyclerRowModel dataModel=recyclerRowModelList.get(position);
-        xmlRow.rowTitle.setText(dataModel.getName());
+		DbEntryModel dataModel=recyclerRowModelList.get(position);
+        xmlRow.rowTitle.setText(dataModel.getColumnNAME());
 		xmlRow.rowdetails.setText(brand + " " + model + ", " + date + ". ");
 		xmlRow.rowstatus.setText(isDelivered + " " + deadline + ".");
-		if (dataModel.getstatus().contains("Entregado"))
+		if (dataModel.getColumnIsDelivered().contains("Entregado"))
 		{
 			xmlRow.c3.setMax(100);
 			xmlRow.c3.setProgress(100);

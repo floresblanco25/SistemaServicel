@@ -1,17 +1,19 @@
 package com.servicel.system;
 import android.app.*;
 import android.content.*;
+import android.graphics.*;
 import android.os.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.*;
 import android.view.*;
+import android.view.View.*;
 import android.widget.*;
 import com.servicel.system.db.*;
+import java.util.*;
 import nl.psdcompany.duonavigationdrawer.views.*;
 import nl.psdcompany.duonavigationdrawer.widgets.*;
 
 import android.support.v7.widget.Toolbar;
-import android.graphics.*;
 
 
 public class MainActivity extends AppCompatActivity
@@ -53,9 +55,11 @@ public class MainActivity extends AppCompatActivity
 	private DuoDrawerLayout drawerLayout;
 	private DuoDrawerToggle drawerToggle;
 	private TextView menuTitle;
-
 	private View view;
-
+	LinearLayout backup,restore;
+	String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
+	List<DbEntryModel> datamodel;
+	
 
 
 
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 		view = findViewById(R.id.drawer);
+		backup= findViewById(R.id.backupMenu);
+		restore = findViewById(R.id.restoremenu);
 
 
 
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 		
 		
 //typeface
-		overrideFonts(this,view);
+		overrideFonts(this,view,"GoogleSans-Medium.ttf");
 		Typeface font = Typeface.createFromAsset(
 		getAssets(), 
 		"facebook-letter-faces.ttf");
@@ -163,10 +169,37 @@ public class MainActivity extends AppCompatActivity
 
 //Initialize sqlite
 		recolectDataAdapter = new MySQLiteHelper(getApplicationContext());
+		
+		
+		
+		
+		
+		
+//backup
+		backup.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					
+
+				}
+
+
+			});
+		
+		
+		
 
 		return;
 	}
 
+	
+	
+	
+	
+	
+	
+	
 
 
 
@@ -201,16 +234,16 @@ public class MainActivity extends AppCompatActivity
 	
 	
 //font
-	public static void overrideFonts(final Context context, final View v) {
+	public static void overrideFonts(final Context context, final View v, String f) {
 		try {
 			if (v instanceof ViewGroup) {
 				ViewGroup vg = (ViewGroup) v;
 				for (int i = 0; i < vg.getChildCount(); i++) {
 					View child = vg.getChildAt(i);
-					overrideFonts(context, child);
+					overrideFonts(context, child,f);
 				}
 			} else if (v instanceof TextView ) {
-				((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "GoogleSans-Regular.ttf"));
+				((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), f));
 			}
 		} catch (Exception e) {
 		}

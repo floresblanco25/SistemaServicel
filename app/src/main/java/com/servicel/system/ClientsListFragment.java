@@ -63,7 +63,7 @@ public class ClientsListFragment extends Fragment
 		
 		
 //Typeface
-		MainActivity.overrideFonts(getActivity(),v);
+		MainActivity.overrideFonts(getActivity(),v,"GoogleSans-Regular.ttf");
 		Typeface font = Typeface.createFromAsset(
 		getActivity().getAssets(), 
 			"facebook-letter-faces.ttf");

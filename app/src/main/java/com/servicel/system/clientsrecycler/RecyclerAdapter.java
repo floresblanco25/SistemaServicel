@@ -88,6 +88,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 		
 		
 		
+		
 //set progress bar 
 		if (object.getColumnIsDelivered().contains("Entregado"))
 		{
@@ -156,6 +157,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 			fillColor = v.getContext().getResources().getString(R.color.circleProgressFillUnits);
 			lockedColor = v.getContext().getResources().getColor(R.color.circleProgressLockedUnits);
 			context = v.getContext();
+			
+			
+			
+			
+			
+			
+			MainActivity.overrideFonts(v.getContext(),v,"GoogleSans-Regular.ttf");
+			MainActivity.overrideFonts(context,rowTitle,"GoogleSans-Medium.ttf");
 
 
 

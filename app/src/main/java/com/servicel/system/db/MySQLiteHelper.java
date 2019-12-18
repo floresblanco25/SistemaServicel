@@ -3,11 +3,12 @@ package com.servicel.system.db;
 import android.content.*;
 import android.database.*;
 import android.database.sqlite.*;
+import android.os.*;
 import android.util.*;
 import android.widget.*;
 import com.servicel.system.*;
-import com.servicel.system.clientsrecycler.*;
 import java.io.*;
+import java.nio.channels.*;
 import java.util.*;
 
 /**
@@ -18,7 +19,7 @@ import java.util.*;
 
 public class MySQLiteHelper
 {
-    static final String DATABASE_NAME = "serviciocelular.db";
+    public static final String DATABASE_NAME = "serviciocelular.db";
     String ok="OK";
     static final int DATABASE_VERSION = 1;
     public  static String getName="";
@@ -287,6 +288,40 @@ public class MySQLiteHelper
 		DbEntryModel n = data.get(data.size()-1);
 		Toast.makeText(context, n.getColumnNAME() + " borrado exitosamente", Toast.LENGTH_LONG).show();
 		return db.delete(TABLE_NAME, "ID" + "=" + id, null) > 0;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+//export
+	public void backupDb(){
+		try {
+			File sd = Environment.getExternalStorageDirectory();
+			File data = Environment.getDataDirectory();
+
+			if (sd.canWrite()) {
+				String currentDBPath = "//data/com.servicel.system/databases/serviciocelular.db";
+				String backupDBPath = "serviciocelular.db";
+				File currentDB = new File(data, currentDBPath);
+				File backupDB = new File(sd, backupDBPath);
+
+				if (currentDB.exists())
+				{
+					FileChannel src = new FileInputStream(currentDB).getChannel();
+					FileChannel dst = new FileOutputStream(backupDB).getChannel();
+					dst.transferFrom(src, 0, src.size());
+					src.close();
+					dst.close();
+					MainActivity.toast("Backup is successful to SD card");
+				}
+			}
+		} catch (Exception e) {
+			MainActivity.toast(e.toString());
+		}
 	}
 
 

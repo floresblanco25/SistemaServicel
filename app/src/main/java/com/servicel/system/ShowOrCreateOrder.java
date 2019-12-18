@@ -589,6 +589,69 @@ public class ShowOrCreateOrder extends Fragment
 		deadline.setText("");
 		enableall();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//save
+	private void save()
+	{
+		databaseHelper.backupDb();
+			dateStr = date.getText().toString();
+			timeStr = time.getText().toString();
+			nameStr = name.getText().toString();
+			phoneStr = phone.getText().toString();
+			emailStr = email.getText().toString();
+			imeiStr = imei.getText().toString();
+			brandStr = brand.getText().toString();
+			modelStr = model.getText().toString();
+			colorStr = color.getText().toString();
+			conditionsStr = conditions.getText().toString();
+			passwordStr = password.getText().toString();
+			kindOfServiceStr = kindOfService.getText().toString();
+			totalPriceStr = totalPrice.getText().toString();
+			depositStr = deposit.getText().toString();
+			partsPriceStr = partsPrice.getText().toString();
+			deadlineStr = deadline.getText().toString();
+			powersOnBool = powersOn.isOn();
+			hasCoverBool = hasCover.isOn();
+			hasSimBool = hasSim.isOn();
+			hasMemoryBool = hasMemory.isOn();
+			hasBatteryBool = hasBattery.isOn();
+			hasScrewsBool = hasScrews.isOn();
+
+			if (
+				name.getText().toString().isEmpty())
+			{toast("Escriba el nombre del Cliente");}
+			else
+			{
+				if (edition == false)
+				{
+					toast("edition false");
+					receieveOk = databaseHelper.insertEntry(dateStr, timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
+															conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
+															partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
+															hasBatteryBool, hasScrewsBool, "Pendiente");
+					goBack();
+				}
+				if (edition == true)
+				{
+					toast("edition true");
+					updateRow(idStr, dateStr, timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
+							  conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
+							  partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
+							  hasBatteryBool, hasScrewsBool, isDeliveredStr_);
+				}
+
+			}
+	}
 
 
 
@@ -607,55 +670,9 @@ public class ShowOrCreateOrder extends Fragment
 			switch (item.getItemId())
 			{
                 case R.id.save:
-					{
-						dateStr = date.getText().toString();
-						timeStr = time.getText().toString();
-						nameStr = name.getText().toString();
-						phoneStr = phone.getText().toString();
-						emailStr = email.getText().toString();
-						imeiStr = imei.getText().toString();
-						brandStr = brand.getText().toString();
-						modelStr = model.getText().toString();
-						colorStr = color.getText().toString();
-						conditionsStr = conditions.getText().toString();
-						passwordStr = password.getText().toString();
-						kindOfServiceStr = kindOfService.getText().toString();
-						totalPriceStr = totalPrice.getText().toString();
-						depositStr = deposit.getText().toString();
-						partsPriceStr = partsPrice.getText().toString();
-						deadlineStr = deadline.getText().toString();
-						powersOnBool = powersOn.isOn();
-						hasCoverBool = hasCover.isOn();
-						hasSimBool = hasSim.isOn();
-						hasMemoryBool = hasMemory.isOn();
-						hasBatteryBool = hasBattery.isOn();
-						hasScrewsBool = hasScrews.isOn();
-
-						if (
-							name.getText().toString().isEmpty())
-						{toast("Escriba el nombre del Cliente");}
-						else
-						{
-							if (edition == false)
-							{
-								toast("edition false");
-								receieveOk = databaseHelper.insertEntry(dateStr, timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
-																		conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
-																		partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
-																		hasBatteryBool, hasScrewsBool, "Pendiente");
-								goBack();
-							}
-							if (edition == true)
-							{
-								toast("edition true");
-								updateRow(idStr, dateStr, timeStr, nameStr, phoneStr, emailStr, imeiStr, brandStr, modelStr, colorStr,
-										  conditionsStr, passwordStr, kindOfServiceStr, totalPriceStr, depositStr, 
-										  partsPriceStr, deadlineStr, powersOnBool, hasCoverBool, hasSimBool, hasMemoryBool, 
-										  hasBatteryBool, hasScrewsBool, isDeliveredStr_);
-							}
-
-						}
-					}
+				{
+					save();
+				}
                     return true;
 
 
@@ -817,6 +834,7 @@ public class ShowOrCreateOrder extends Fragment
             }
             return false;
         }
+
     };
 
 	

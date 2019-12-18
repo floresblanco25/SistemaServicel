@@ -27,6 +27,16 @@ public class SQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
 
+	@Override
+	public void onConfigure(SQLiteDatabase db)
+	{
+		// TODO: Implement this method
+		super.onConfigure(db);
+		db.disableWriteAheadLogging();
+	}
+	
+	
+
     // Called when there is a database version mismatch meaning that the version
     // of the database on disk needs to be upgraded to the current version.
     @Override

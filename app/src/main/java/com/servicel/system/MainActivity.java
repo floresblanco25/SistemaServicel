@@ -5,10 +5,13 @@ import android.graphics.*;
 import android.os.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.*;
+import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import com.servicel.system.db.*;
+import java.io.*;
+import java.nio.channels.*;
 import java.util.*;
 import nl.psdcompany.duonavigationdrawer.views.*;
 import nl.psdcompany.duonavigationdrawer.widgets.*;
@@ -21,7 +24,7 @@ public class MainActivity extends AppCompatActivity
 {
 
 //initialize
-	MySQLiteHelper recolectDataAdapter;
+	MySQLiteHelper dbHelper;
 	public static String COLUMNID = "ID";
 	public static String TABLENAME = "CLIENTES";
 	public static String COLUMNNDATE = "DATE";
@@ -168,7 +171,9 @@ public class MainActivity extends AppCompatActivity
 
 
 //Initialize sqlite
-		recolectDataAdapter = new MySQLiteHelper(getApplicationContext());
+		dbHelper = new MySQLiteHelper(getApplicationContext());
+		dbHelper = dbHelper.open();
+		
 		
 		
 		
@@ -180,8 +185,9 @@ public class MainActivity extends AppCompatActivity
 
 				@Override
 				public void onClick(View v) {
+				dbHelper.backupDb();
 					
-
+					
 				}
 
 
@@ -248,6 +254,15 @@ public class MainActivity extends AppCompatActivity
 		} catch (Exception e) {
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

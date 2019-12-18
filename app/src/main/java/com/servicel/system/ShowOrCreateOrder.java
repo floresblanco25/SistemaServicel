@@ -603,7 +603,6 @@ public class ShowOrCreateOrder extends Fragment
 //save
 	private void save()
 	{
-		databaseHelper.backupDb();
 			dateStr = date.getText().toString();
 			timeStr = time.getText().toString();
 			nameStr = name.getText().toString();

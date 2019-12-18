@@ -1,22 +1,21 @@
 package com.servicel.system;
+import android.*;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.*;
-import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import com.servicel.system.db.*;
-import java.io.*;
-import java.nio.channels.*;
 import java.util.*;
 import nl.psdcompany.duonavigationdrawer.views.*;
 import nl.psdcompany.duonavigationdrawer.widgets.*;
 
 import android.support.v7.widget.Toolbar;
+import android.support.annotation.*;
 
 
 public class MainActivity extends AppCompatActivity
@@ -62,7 +61,8 @@ public class MainActivity extends AppCompatActivity
 	LinearLayout backup,restore;
 	String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 	List<DbEntryModel> datamodel;
-	
+	private RequestPermissionHandler mRequestPermissionHandler;
+
 
 
 
@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity
 		view = findViewById(R.id.drawer);
 		backup= findViewById(R.id.backupMenu);
 		restore = findViewById(R.id.restoremenu);
+		mRequestPermissionHandler = new RequestPermissionHandler();
+		mCheckPermission();
 
 
 
@@ -186,11 +188,18 @@ public class MainActivity extends AppCompatActivity
 				@Override
 				public void onClick(View v) {
 				dbHelper.backupDb();
-					
-					
 				}
 
 
+			});
+		restore.setOnClickListener(new View.OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					dbHelper.restoreDb();
+					recreate();
+				}
 			});
 		
 		
@@ -253,11 +262,39 @@ public class MainActivity extends AppCompatActivity
 			}
 		} catch (Exception e) {
 		}
+		
 	}
 	
 	
 	
 	
+	
+	
+	
+	
+	
+		private void mCheckPermission(){
+			mRequestPermissionHandler.requestPermission(this, new String[] {
+					Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
+				}, 123, new RequestPermissionHandler.RequestPermissionListener() {
+					@Override
+					public void onSuccess() {
+					}
+
+					@Override
+					public void onFailed() {
+					}
+				});
+
+		}
+		
+	@Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+										   @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        mRequestPermissionHandler.onRequestPermissionsResult(requestCode, permissions,
+															 grantResults);
+    }
 	
 	
 	

@@ -30,6 +30,8 @@ public class MySQLiteHelper
     private static SQLiteOpenHelper dbHelper;
     private static String TABLE_NAME = "CLIENTES";
 
+	private String foldername = "/Servicio Celular";
+
 
 
 
@@ -92,7 +94,8 @@ public class MySQLiteHelper
             db = dbHelper.getWritableDatabase();
             long result=db.insert("CLIENTES", null, newValues);
             System.out.print(result);
-            Toast.makeText(context, "Orden guardada", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Orden guardada", Toast.LENGTH_SHORT).show();
+			backupDb();
 
 
         }
@@ -302,10 +305,12 @@ public class MySQLiteHelper
 		try {
 			File sd = Environment.getExternalStorageDirectory();
 			File data = Environment.getDataDirectory();
+			File folder = new File(Environment.getExternalStorageDirectory() + foldername);
+			folder.mkdir();
 
 			if (sd.canWrite()) {
-				String currentDBPath = "//data/com.servicel.system/databases/serviciocelular.db";
-				String backupDBPath = "serviciocelular.db";
+				String currentDBPath = DB_FILEPATH;
+				String backupDBPath = foldername+"/"+DATABASE_NAME;
 				File currentDB = new File(data, currentDBPath);
 				File backupDB = new File(sd, backupDBPath);
 
@@ -316,7 +321,41 @@ public class MySQLiteHelper
 					dst.transferFrom(src, 0, src.size());
 					src.close();
 					dst.close();
-					MainActivity.toast("Backup is successful to SD card");
+					MainActivity.toast("Backup is successful to "+backupDBPath);
+				}
+			}
+		} catch (Exception e) {
+			MainActivity.toast(e.toString());
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+//restore
+	public void restoreDb(){
+		try {
+			File sd = Environment.getExternalStorageDirectory();
+			File data = Environment.getDataDirectory();
+
+			if (sd.canWrite()) {
+				String currentDBPath = DB_FILEPATH;
+				String backupDBPath =  foldername+"/"+DATABASE_NAME;
+				File currentDB = new File(data, currentDBPath);
+				File backupDB = new File(sd, backupDBPath);
+
+				if (currentDB.exists()) {
+					FileChannel src = new FileInputStream(backupDB).getChannel();
+					FileChannel dst = new FileOutputStream(currentDB).getChannel();
+					dst.transferFrom(src, 0, src.size());
+					src.close();
+					dst.close();
+					MainActivity.toast("Datos restaurados correctamente desde "+backupDBPath);
 				}
 			}
 		} catch (Exception e) {
@@ -328,8 +367,8 @@ public class MySQLiteHelper
 
 
 
-
-	public static String DB_FILEPATH = "/data/data/com.servicel.system/databases/serviciocelular.db";
+	public static String DB_FILEPATH = "//data/com.servicel.system/databases/serviciocelular.db"
+	;
 
 }
 

@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
+import android.support.annotation.*;
 import android.support.design.widget.*;
 import android.support.v7.widget.*;
 import android.text.*;
@@ -61,7 +62,6 @@ public class ClientsListFragment extends Fragment
 		
 		
 		
-		
 //Typeface
 		MainActivity.overrideFonts(getActivity(),v,"GoogleSans-Regular.ttf");
 		Typeface font = Typeface.createFromAsset(
@@ -107,58 +107,6 @@ public class ClientsListFragment extends Fragment
 		
 		
 		
-//add new entry button
-		FloatingActionButton fab = v.findViewById(R.id.newOrder);
-		fab.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view)
-				{
-					click = !click;
-					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
-					{
-						Interpolator interpolador = AnimationUtils.loadInterpolator(getActivity(),
-																					android.R.interpolator.fast_out_slow_in);
-
-						view.animate()
-                            .rotation(click ? 45f : 0)
-                            .setInterpolator(interpolador)
-                            .start();
-					}
-						final Intent i = new Intent(getActivity(), LauncherActivity.class);
-						final Bundle b = new Bundle();
-						b.putString("id", "");
-						b.putString("date", "");
-						b.putString("time", "");
-						b.putString("name", "");
-						b.putString("phone", "");
-						b.putString("email", "");
-						b.putString("imei", "");
-						b.putString("brand", "");
-						b.putString("model", "");
-						b.putString("color", "");
-						b.putString("conditions", "");
-						b.putString("password", "");
-						b.putString("kindofservice", "");
-						b.putString("totalprice", "");
-						b.putString("deposit", "");
-						b.putString("partsprice", "");
-						b.putString("deadline", "");
-						b.putString("powerson", "");
-						b.putString("hascover", "");
-						b.putString("hassim", "");
-						b.putString("hasmemory", "");
-						b.putString("hasbattery", "");
-						b.putString("hasscrews", "");
-
-						i.putExtras(b);
-						getActivity().startActivity(i);
-				}
-			});
-			
-			
-			
-			
-			
 			
 			
 			
@@ -192,6 +140,18 @@ public class ClientsListFragment extends Fragment
 
         return v;
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

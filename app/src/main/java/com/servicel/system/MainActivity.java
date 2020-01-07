@@ -4,18 +4,21 @@ import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
+import android.support.annotation.*;
+import android.support.design.widget.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
+import com.servicel.system.*;
 import com.servicel.system.db.*;
 import java.util.*;
 import nl.psdcompany.duonavigationdrawer.views.*;
 import nl.psdcompany.duonavigationdrawer.widgets.*;
 
 import android.support.v7.widget.Toolbar;
-import android.support.annotation.*;
+import com.servicel.system.R;
 
 
 public class MainActivity extends AppCompatActivity
@@ -81,6 +84,10 @@ public class MainActivity extends AppCompatActivity
 		restore = findViewById(R.id.restoremenu);
 		mRequestPermissionHandler = new RequestPermissionHandler();
 		mCheckPermission();
+		//bottom bar
+		BottomNavigationView navigation = findViewById(R.id.navigationmain);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+		
 
 
 
@@ -213,6 +220,65 @@ public class MainActivity extends AppCompatActivity
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	//bottom nav view
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+	= new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item)
+		{
+			switch (item.getItemId())
+			{
+                case R.id.addPerson:
+					{
+						final Intent i = new Intent(getApplicationContext(), LauncherActivity.class);
+						final Bundle b = new Bundle();
+						b.putString("id", "");
+						b.putString("date", "");
+						b.putString("time", "");
+						b.putString("name", "");
+						b.putString("phone", "");
+						b.putString("email", "");
+						b.putString("imei", "");
+						b.putString("brand", "");
+						b.putString("model", "");
+						b.putString("color", "");
+						b.putString("conditions", "");
+						b.putString("password", "");
+						b.putString("kindofservice", "");
+						b.putString("totalprice", "");
+						b.putString("deposit", "");
+						b.putString("partsprice", "");
+						b.putString("deadline", "");
+						b.putString("powerson", "");
+						b.putString("hascover", "");
+						b.putString("hassim", "");
+						b.putString("hasmemory", "");
+						b.putString("hasbattery", "");
+						b.putString("hasscrews", "");
+
+						i.putExtras(b);
+						startActivity(i);
+					}
+                    return true;
+
+
+
+
+				case R.id.showMenu:{
+
+					}
+            }
+            return false;
+        }
+
+    };
 	
 	
 

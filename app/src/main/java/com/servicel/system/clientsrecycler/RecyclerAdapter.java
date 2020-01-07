@@ -165,6 +165,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 			
 			MainActivity.overrideFonts(v.getContext(),v,"GoogleSans-Regular.ttf");
 			MainActivity.overrideFonts(context,rowTitle,"GoogleSans-Medium.ttf");
+			MainActivity.overrideFonts(context,rowdetails,"GoogleSans-Regular.ttf");
 
 
 

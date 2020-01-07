@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="pendings">Pendientes</string>
+
+    <string name="show_menu">Menú</string>
+
+    <string name="client">Client</string>
+    <string name="client_information">Client information</string>
+    <string name="status">status</string>
+
+    <string name="save">Guardar</string>
+    <string name="edit">Editar</string>
+    <string name="deliver">Entregar</string>
+    <string name="clear">Limpiar</string>
+    <string name="delete_order">Eliminar</string>
+
+    <string name="add">Añadir</string>
+
     <string name="backup">Respaldar datos</string>
     <string name="restore">Restaurar datos</string>
 

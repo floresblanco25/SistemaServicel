@@ -1,69 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:tag="menu"
-	android:orientation="vertical"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:layout_margin="@dimen/sidemargin"
-	android:gravity="top|left">
-
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="@string/app_name"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:layout_margin="@dimen/menu_text_spacing"
-		android:textColor="@color/menuTitleText"/>
-
-	<View
-		android:background="?android:attr/dividerVertical"
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:tag="menu"
+		android:orientation="vertical"
 		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:layout_margin="@dimen/menu_text_spacing"
-		android:layout_marginTop="0dp"/>
-
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content">
-
-		<ImageView
-			android:src="@drawable/outline_backup_black_24"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_margin="@dimen/menu_icons_spacing"
-			android:tint="@color/menu_backup"/>
+		android:layout_height="match_parent"
+		android:layout_margin="@dimen/sidemargin"
+		android:gravity="top|left"
+	>
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/backup"
+			android:text="@string/app_name"
+			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_margin="@dimen/menu_text_spacing"
-			android:layout_marginLeft="0dp"/>
+			android:textColor="@color/menuTitleText"
+			android:id="@+id/menuTitlev"/>
 
-	</LinearLayout>
 
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content">
-
-		<ImageView
-			android:src="@drawable/outline_restore_black_24"
+		<LinearLayout
+			android:orientation="horizontal"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_margin="@dimen/menu_icons_spacing"
-			android:tint="@color/menu_restore"/>
+			android:id="@+id/backupMenu">
 
-		<TextView
+			<ImageView
+				android:src="@drawable/outline_backup_black_24"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/menu_icons_spacing"
+				android:tint="@color/menu_backup"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/backup"
+				android:layout_margin="@dimen/menu_text_spacing"
+				android:layout_marginLeft="0dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/restore"
-			android:layout_margin="@dimen/menu_text_spacing"
-			android:layout_marginLeft="0dp"/>
+			android:id="@+id/restoremenu">
+
+			<ImageView
+				android:src="@drawable/outline_restore_black_24"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/menu_icons_spacing"
+				android:tint="@color/menu_restore"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/restore"
+				android:layout_margin="@dimen/menu_text_spacing"
+				android:layout_marginLeft="0dp"/>
+
+		</LinearLayout>
 
 	</LinearLayout>
-
-</LinearLayout>
 

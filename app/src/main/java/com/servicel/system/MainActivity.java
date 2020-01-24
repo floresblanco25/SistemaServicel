@@ -18,8 +18,8 @@ import nl.psdcompany.duonavigationdrawer.views.*;
 import nl.psdcompany.duonavigationdrawer.widgets.*;
 
 import android.support.v7.widget.Toolbar;
+import com.servicel.system.LauncherActivity;
 import com.servicel.system.R;
-
 
 public class MainActivity extends AppCompatActivity
 
@@ -88,6 +88,14 @@ public class MainActivity extends AppCompatActivity
 		BottomNavigationView navigation = findViewById(R.id.navigationmain);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 		
+		
+		
+		
+		
+		
+//scroll listener
+		CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
+		layoutParams.setBehavior(new BottomNavigationViewBehavior());
 
 
 

@@ -8,10 +8,13 @@ import android.support.annotation.*;
 import android.support.design.widget.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.*;
+import android.text.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
+import com.libizo.*;
 import com.servicel.system.*;
+import com.servicel.system.clientsrecycler.*;
 import com.servicel.system.db.*;
 import java.util.*;
 import nl.psdcompany.duonavigationdrawer.views.*;
@@ -26,6 +29,12 @@ public class MainActivity extends AppCompatActivity
 {
 
 //initialize
+	MySQLiteHelper database;
+    RecyclerView recyclerView;
+    RecyclerAdapter adapter;
+    List<DbEntryModel> datamodel;
+	Boolean click = false;
+	CustomEditText edSearch;
 	MySQLiteHelper dbHelper;
 	public static String COLUMNID = "ID";
 	public static String TABLENAME = "CLIENTES";
@@ -51,8 +60,6 @@ public class MainActivity extends AppCompatActivity
 	public static String COLUMNHASMEMORY = "HASMEMORY";
 	public static String COLUMNHASBATTERY = "HASBATTERY";
 	public static String COLUMNHASSCREWS = "HASSCREWS";
-	Fragment fragmentToOpen;
-    FrameLayout container;
     private static Context mContext;
     public static String currentFragment="current";
 	public static String tagShowOrder = "shororder";
@@ -63,7 +70,6 @@ public class MainActivity extends AppCompatActivity
 	private View view;
 	LinearLayout backup,restore;
 	String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
-	List<DbEntryModel> datamodel;
 	private RequestPermissionHandler mRequestPermissionHandler;
 
 
@@ -82,11 +88,47 @@ public class MainActivity extends AppCompatActivity
 		view = findViewById(R.id.drawer);
 		backup= findViewById(R.id.backupMenu);
 		restore = findViewById(R.id.restoremenu);
+		edSearch = findViewById(R.id.edSearch);
 		mRequestPermissionHandler = new RequestPermissionHandler();
 		mCheckPermission();
 		//bottom bar
 		BottomNavigationView navigation = findViewById(R.id.navigationmain);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//Recycler
+		MySQLiteHelper db = new MySQLiteHelper(this);
+		datamodel = new ArrayList<DbEntryModel>();
+		datamodel=db.getEntries(
+			MainActivity.COLUMNID,
+			MainActivity.COLUMNNDATE, MainActivity.COLUMNTIME, MainActivity.COLUMNNAME,
+			MainActivity.COLUMNNPHONE, MainActivity.COLUMNNEMAIL, MainActivity.COLUMNNIMEI,
+			MainActivity.COLUMNBRAND, MainActivity.COLUMNMODEL, MainActivity.COLUMNCOLOR, MainActivity.COLUMNCONDITIONS,
+			MainActivity.COLUMNPASSWORD, MainActivity.COLUMNKINDOFSERVICE, MainActivity.COLUMNTOTALPRICE,
+			MainActivity.COLUMNDEPOSIT, MainActivity.COLUMNPARTSPRICE, MainActivity.COLUMNDEADLINE, MainActivity.COLUMNPOWERSON,
+			MainActivity.COLUMNHASCOVER, MainActivity.COLUMNHASSIM, MainActivity.COLUMNHASMEMORY,
+			MainActivity.COLUMNHASBATTERY, MainActivity.COLUMNHASSCREWS, MainActivity.COLUMNISDELIVERED
+		);
+		recyclerView =  findViewById(R.id.recycler);
+		adapter = new RecyclerAdapter(datamodel);
+		LinearLayoutManager mLayoutManager =new LinearLayoutManager(this);
+		mLayoutManager.setReverseLayout(true);
+		mLayoutManager.setStackFromEnd(true);
+		recyclerView.setLayoutManager(mLayoutManager);
+		recyclerView.setItemAnimator(new DefaultItemAnimator());
+		recyclerView.setHasFixedSize(true);
+		recyclerView.setAdapter(adapter);
+		
+		
+		
 		
 		
 		
@@ -102,6 +144,9 @@ public class MainActivity extends AppCompatActivity
 
 
 
+		
+		
+		
 
 //light statusbar
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -113,17 +158,48 @@ public class MainActivity extends AppCompatActivity
 		}
 
 
+		
+		
+		
+		
+		
+		
+
+//search
+		edSearch.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable editable) {
+					filter(editable.toString());
+				}
+			});
 
 
 
 
 
-
-
+			
+			
+			
+			
+			
+			
 //toolbar
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		mContext = this.getApplicationContext();
+		
+		
+		
 		
 		
 		
@@ -136,8 +212,13 @@ public class MainActivity extends AppCompatActivity
 		"facebook-letter-faces.ttf");
 		menuTitle = findViewById(R.id.menuTitlev);
 		menuTitle.setTypeface(font);
+		TextView toolTit = findViewById(R.id.toolbar_title);
+		toolTit.setTypeface(font);
 		
 		
+		
+		
+	
 		
 		
 		
@@ -147,41 +228,14 @@ public class MainActivity extends AppCompatActivity
 		drawerToggle = new DuoDrawerToggle(this, drawerLayout, toolbar,
 														   R.string.navigation_drawer_open,
 														   R.string.navigation_drawer_close);
-
 		drawerLayout.setDrawerListener(drawerToggle);
 		drawerToggle.syncState();
 		
 		
 		
 		
-		
-//instance
-		if (savedInstanceState != null)
-		{
-			fragmentToOpen = getFragmentManager().getFragment(savedInstanceState, currentFragment);
-		}
-		else
-		{
-			FragmentManager manager = getFragmentManager();
-			final FragmentTransaction transaction= manager.beginTransaction();
 
 
-
-
-
-
-//Show initial frgmnt
-			fragmentToOpen = new ClientsListFragment();
-			try
-			{
-				transaction.replace(R.id.container, fragmentToOpen, currentFragment);
-				transaction.addToBackStack(currentFragment);
-				transaction.commit();	}
-			catch (Exception e)
-			{
-				e.printStackTrace();	
-			}
-		}
 
 
 
@@ -193,6 +247,9 @@ public class MainActivity extends AppCompatActivity
 		
 		
 		
+		
+		
+	
 		
 		
 		
@@ -276,12 +333,19 @@ public class MainActivity extends AppCompatActivity
 					}
                     return true;
 
-
-
-
-				case R.id.showMenu:{
-						drawerLayout.openDrawer();
+					case R.id.showpending:
+					{
+						filterPendings("pendiente");
 					}
+					return true;
+					
+				case R.id.showdelivered:
+					{
+						filterPendings("");
+					}
+					return true;
+
+
             }
             return false;
         }
@@ -306,13 +370,6 @@ public class MainActivity extends AppCompatActivity
 
 
 	
-	
-	
-	//menu button
-	public void openCloseMenu(View view){
-		
-		drawerLayout.openDrawer();
-	};
 	
 	
 	
@@ -345,6 +402,7 @@ public class MainActivity extends AppCompatActivity
 	
 	
 	
+//Permissions
 		private void mCheckPermission(){
 			mRequestPermissionHandler.requestPermission(this, new String[] {
 					Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
@@ -367,6 +425,44 @@ public class MainActivity extends AppCompatActivity
         mRequestPermissionHandler.onRequestPermissionsResult(requestCode, permissions,
 															 grantResults);
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//Filter
+	private void filter(String text) {
+        ArrayList<DbEntryModel> filterdList = new ArrayList<>();
+		for (DbEntryModel model : datamodel)
+		{
+            if (model.getColumnNAME().toLowerCase().contains(text.toLowerCase())
+
+				){
+                filterdList.add(model);
+            }
+        }
+
+        adapter.filterList(filterdList);
+    }
+	private void filterPendings(String text) {
+        ArrayList<DbEntryModel> filterdList = new ArrayList<>();
+		for (DbEntryModel model : datamodel)
+		{
+            if (model.getColumnIsDelivered().toLowerCase().contains(text.toLowerCase())
+
+				){
+                filterdList.add(model);
+            }
+        }
+
+        adapter.filterList(filterdList);
+    }
+
 	
 	
 	

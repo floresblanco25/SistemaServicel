@@ -81,10 +81,76 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 	
-	<FrameLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:id="@+id/container"/>
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/primary">
+
+			<android.support.v7.widget.Toolbar
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:theme="@style/ToolbarTheme"
+				app:titleTextAppearance="@style/Toolbar.TitleText"
+				android:elevation="0dp"
+				app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:orientation="horizontal"
+					android:elevation="0dp"
+					android:gravity="left|center_vertical"
+					android:layout_marginLeft="@dimen/sidemargin"
+					android:layout_marginRight="@dimen/sidemargin"
+				>
+
+
+					<TextView
+						android:text="@string/app_name"
+						android:id="@+id/toolbar_title"
+						android:layout_marginLeft="@dimen/sidemargin"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/toolbartext"
+						android:gravity="left"
+						android:textSize="21sp"
+						android:textStyle="bold"/>
+
+					<com.libizo.CustomEditText
+						android:id="@+id/edSearch"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/searchpadding"
+						android:hint="@string/search"
+						android:inputType="textNoSuggestions"
+						app:libIZO_clearIconTint="@color/clearIcon"
+						app:libIZO_setBackgroundColor="@color/edTextColor"
+						app:libIZO_setBorderView="true"
+						app:libIZO_setClearIconVisible="true"
+						app:libIZO_setCornerRadius="48dp"
+						app:libIZO_setStrokeWidth="0dp"/>
+
+				</LinearLayout>
+
+			</android.support.v7.widget.Toolbar>
+
+			<android.support.v7.widget.RecyclerView
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				android:id="@+id/recycler"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+			</android.support.v7.widget.RecyclerView>
+
+
+
+
+		</LinearLayout>
+
+		
 	
 		<android.support.design.widget.BottomNavigationView
 			android:id="@+id/navigationmain"

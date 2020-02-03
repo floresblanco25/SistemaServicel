@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity
 	
 	
 	
-	
+
 	
 	
 	
@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity
 
 
 				case R.id.showMenu:{
-
+						drawerLayout.openDrawer();
 					}
             }
             return false;
@@ -289,8 +289,6 @@ public class MainActivity extends AppCompatActivity
     };
 	
 	
-
-
 
 
 

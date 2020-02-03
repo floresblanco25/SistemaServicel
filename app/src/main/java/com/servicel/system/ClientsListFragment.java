@@ -97,7 +97,14 @@ public class ClientsListFragment extends Fragment
 		mLayoutManager.setStackFromEnd(true);
 		recyclerView.setLayoutManager(mLayoutManager);
 		recyclerView.setItemAnimator(new DefaultItemAnimator());
+		recyclerView.setHasFixedSize(true);
 		recyclerView.setAdapter(adapter);
+		
+		
+		
+		
+		
+		
 
 
 

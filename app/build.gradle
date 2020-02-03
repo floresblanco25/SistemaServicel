@@ -32,6 +32,5 @@ dependencies {
 	api 'com.android.support:appcompat-v7:27.0.1'
 	api 'com.github.angads25:toggle:1.0.0'
 	implementation 'com.libizo:customedittext:1.0.6'
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

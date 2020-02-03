@@ -2,9 +2,9 @@
 <resources>
     <string name="pendings">Pendientes</string>
 
-    <string name="show_menu">Menú</string>
+    <string name="show_menu">Más</string>
 
-    <string name="client">Client</string>
+    <string name="client">Cliente</string>
     <string name="client_information">Client information</string>
     <string name="status">status</string>
 

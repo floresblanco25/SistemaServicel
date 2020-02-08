@@ -321,14 +321,29 @@ public class MySQLiteHelper
 					dst.transferFrom(src, 0, src.size());
 					src.close();
 					dst.close();
-					MainActivity.toast("Backup is successful to "+backupDBPath);
+					MainActivity.toast("Copia de seguridad guardada en  "+backupDBPath);
 				}
 			}
 		} catch (Exception e) {
 			MainActivity.toast(e.toString());
 		}
 	}
+	
+	
+	public File ShareDb(){
+			File sd = Environment.getExternalStorageDirectory();
+			File data = Environment.getDataDirectory();
+			File folder = new File(Environment.getExternalStorageDirectory() + foldername);
+			folder.mkdir();
 
+				String currentDBPath = DB_FILEPATH;
+				String backupDBPath = foldername+"/"+DATABASE_NAME;
+				File currentDB = new File(data, currentDBPath);
+				File backupDB = new File(sd, backupDBPath);
+
+		MainActivity.toast("Compartiendo");
+		return backupDB;
+		}
 	
 	
 	

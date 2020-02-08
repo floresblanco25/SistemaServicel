@@ -1,8 +1,8 @@
 package com.servicel.system;
 import android.*;
-import android.app.*;
 import android.content.*;
 import android.graphics.*;
+import android.net.*;
 import android.os.*;
 import android.support.annotation.*;
 import android.support.design.widget.*;
@@ -16,12 +16,13 @@ import com.libizo.*;
 import com.servicel.system.*;
 import com.servicel.system.clientsrecycler.*;
 import com.servicel.system.db.*;
+import java.io.*;
+import java.net.*;
 import java.util.*;
 import nl.psdcompany.duonavigationdrawer.views.*;
 import nl.psdcompany.duonavigationdrawer.widgets.*;
 
 import android.support.v7.widget.Toolbar;
-import com.servicel.system.LauncherActivity;
 import com.servicel.system.R;
 
 public class MainActivity extends AppCompatActivity
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity
 	LinearLayout backup,restore;
 	String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 	private RequestPermissionHandler mRequestPermissionHandler;
+
 
 
 
@@ -234,8 +236,26 @@ public class MainActivity extends AppCompatActivity
 		
 		
 		
-
-
+//instance
+//		if (savedInstanceState != null)
+//		{
+//			fragmentToOpen = getFragmentManager().getFragment(savedInstanceState, currentFragment);
+//		}
+//		else
+//		{
+//			FragmentManager manager = getFragmentManager();
+//			final FragmentTransaction transaction= manager.beginTransaction();
+////Show initial frgmnt
+//			fragmentToOpen = new ClientsListFragment();
+//			try
+//			{
+//				transaction.replace(R.id.container, fragmentToOpen, currentFragment);
+//				transaction.addToBackStack(currentFragment);
+//				transaction.commit();	}
+//			catch (Exception e)
+//			{
+//				e.printStackTrace();	
+//			}
 
 
 
@@ -260,6 +280,7 @@ public class MainActivity extends AppCompatActivity
 				@Override
 				public void onClick(View v) {
 				dbHelper.backupDb();
+				//shareFile(dbHelper.ShareDb());
 				}
 
 
@@ -279,6 +300,8 @@ public class MainActivity extends AppCompatActivity
 
 		return;
 	}
+	
+	
 
 	
 	
@@ -464,6 +487,29 @@ public class MainActivity extends AppCompatActivity
     }
 
 	
+	
+	
+	
+	
+	
+	
+	
+//Share file 
+	private void shareFile(File file) {
+
+		Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+
+		intentShareFile.setType(URLConnection.guessContentTypeFromName(file.getName()));
+		intentShareFile.putExtra(Intent.EXTRA_STREAM,
+								 Uri.parse("file://"+file.getAbsolutePath()));
+
+		//if you need
+		//intentShareFile.putExtra(Intent.EXTRA_SUBJECT,"Sharing File Subject);
+		//intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File Description");
+
+		startActivity(Intent.createChooser(intentShareFile, "Share File"));
+
+	}
 	
 	
 	

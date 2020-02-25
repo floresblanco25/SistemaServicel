@@ -183,6 +183,7 @@ public class ShowOrCreateOrder extends Fragment
 //bottom bar
 		BottomNavigationView navigation = v.findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+		BottomNavigationViewHelper.removeShiftMode(navigation);
 
 
 

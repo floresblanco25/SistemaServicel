@@ -342,33 +342,6 @@ public class ShowOrCreateOrder extends Fragment
 
 
 
-//call button
-		FloatingActionButton fab = v.findViewById(R.id.callFab);
-		fab.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view)
-				{
-					click = !click;
-					if ((phone.getText().toString()).matches(""))
-					{
-						toast("No hay número guardado");
-					}
-					else
-					{Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString()));
-						startActivity(intent);
-					}
-					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
-					{
-						Interpolator interpolador = AnimationUtils.loadInterpolator(getActivity(),
-																					android.R.interpolator.fast_out_slow_in);
-
-						view.animate()
-                            .rotation(click ? 45f : 0)
-                            .setInterpolator(interpolador)
-                            .start();
-					}
-				}
-			});
 
 
 
@@ -693,31 +666,15 @@ public class ShowOrCreateOrder extends Fragment
 
 
 
-                case R.id.clear:
-					final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
-					dialog.setTitle("Eliminar datos");
-					dialog.setMessage("¿Seguro que desea restabecer los campos de texto?");
-					dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Si",
-						new DialogInterface.OnClickListener(){
-
-							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								clear();
-
-							}
-
-						});
-					dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", 
-						new DialogInterface.OnClickListener(){
-
-							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								dialog.dismiss();
-							}
-						});
-					dialog.show();
+                case R.id.call:
+					if ((phone.getText().toString()).matches(""))
+					{
+						toast("No hay número guardado");
+					}
+					else
+					{Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString()));
+						startActivity(intent);
+					}
 
                     return true;
 
